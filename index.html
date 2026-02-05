@@ -12,156 +12,1202 @@
   <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
-    :root {--islamic-green:#0a5c36; --islamic-gold:#c19a3f; --islamic-cream:#f8f3e6; --islamic-light:#e9f5e9; --dark-green:#064e3b; --transition:all 0.3s ease;}
-    body {font-family:'Poppins',sans-serif; background-color:var(--islamic-cream); color:#333; scroll-behavior:smooth; overflow-x:hidden; padding-top:80px;}
-    a {text-decoration:none;}
-    .arabic-font {font-family:'Scheherazade New',serif;}
-    .malayalam-font {font-family:'Anek Malayalam',sans-serif;}
-    .pattern-bg {background-image:radial-gradient(circle at 25% 25%,rgba(10,92,54,0.03) 2px,transparent 2px),radial-gradient(circle at 75% 75%,rgba(193,154,63,0.03) 2px,transparent 2px); background-size:50px 50px; position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;}
-    .navbar-optimized {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); border-bottom:3px solid var(--islamic-gold); transition:var(--transition); padding:0.5rem 0; height:80px; z-index:1030 !important;}
-    .navbar-toggler {border-color:rgba(255,255,255,0.5);}
-    .navbar-toggler:focus {box-shadow:0 0 0 2px var(--islamic-gold);}
-    .navbar-toggler-icon {background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
-    .navbar-optimized.scrolled {background:rgba(10,92,54,0.98); box-shadow:0 5px 20px rgba(0,0,0,0.1); height:70px;}
-    .navbar-brand-compact img {border-radius:8px; transition:transform 0.3s ease; width:60px; height:60px; object-fit:contain; filter:brightness(0) invert(1); border:none; box-shadow:0 0 0 2px var(--islamic-gold); padding:0;}
-    .navbar-optimized.scrolled .navbar-brand-compact img {width:50px; height:50px;}
-    .navbar-brand-compact:hover img {transform:scale(1.05);}
-    .brand-text {font-size:1.2rem; line-height:1.2;}
-    .brand-subtext {font-size:0.8rem; opacity:0.9;}
-    .nav-link-optimized {color:#fff !important; font-weight:500; transition:var(--transition); padding-left:0.4rem; padding-right:0.4rem; border-radius:5px; margin:0 2px; white-space:nowrap;}
-    .nav-item-optimized {margin:0 2px;}
-    .nav-link-optimized:hover {color:var(--islamic-gold) !important; background:rgba(255,255,255,0.1);}
-    .dropdown-menu-optimized {background:var(--islamic-green); border:1px solid var(--islamic-gold); border-radius:8px; padding:0.5rem 0;}
-    .dropdown-item-optimized {color:white; padding:0.5rem 1rem; transition:var(--transition);}
-    .dropdown-item-optimized:hover {background:var(--islamic-gold); color:var(--islamic-green);}
-    .page-header {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); color:white; height:30vh; min-height:220px; display:flex; align-items:center; justify-content:center; text-align:center; margin-bottom:3rem; border-bottom:5px solid var(--islamic-gold); position:relative; overflow:hidden;}
-    .page-header::before {content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:radial-gradient(circle at 20% 30%,rgba(193,154,63,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(10,92,54,0.1) 0%,transparent 50%);}
-    .page-header-content {position:relative; z-index:2;}
-    .page-title {font-family:'Scheherazade New',serif; font-size:3.5rem; font-weight:700; margin-bottom:1rem; color:var(--islamic-gold); text-shadow:0 2px 4px rgba(0,0,0,0.3);}
-    .page-subtitle {font-size:1.4rem; opacity:0.95; max-width:800px; margin:0 auto; color:var(--islamic-cream);}
-    .content-section {padding:4rem 0; background:var(--islamic-cream);}
-    .section-header {text-align:center; margin-bottom:3rem; position:relative; padding:2rem 0;}
-    .section-title {color:var(--islamic-green); font-weight:700; display:inline-block; padding:0 1rem; background:var(--islamic-cream); position:relative; z-index:2; margin-bottom:0.5rem; font-size:2.5rem;}
-    .section-header::before {content:''; position:absolute; top:50%; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--islamic-gold),transparent); z-index:1;}
-    .section-subtitle {color:#666; font-size:1.1rem; max-width:700px; margin:0 auto;}
-    .btn-gold {background:linear-gradient(135deg,var(--islamic-gold),#d4af37); border:none; color:var(--islamic-green); font-weight:600; border-radius:8px; box-shadow:0 4px 15px rgba(193,154,63,0.3); transition:var(--transition); padding:0.75rem 1.5rem;}
-    .btn-gold:hover {background:linear-gradient(135deg,#d4af37,var(--islamic-gold)); box-shadow:0 6px 20px rgba(193,154,63,0.4); transform:translateY(-2px); color:var(--islamic-green);}
-    .btn-outline-gold {border:2px solid var(--islamic-gold); color:var(--islamic-gold); background:transparent; border-radius:8px; padding:0.75rem 1.5rem; font-weight:600; transition:var(--transition);}
-    .btn-outline-gold:hover {background:var(--islamic-gold); color:var(--islamic-green);}
-    .portal-card {background:white; border-radius:15px; padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:2px solid transparent; transition:var(--transition); height:100%;}
-    .portal-card:hover {transform:translateY(-5px); border-color:var(--islamic-gold); box-shadow:0 15px 35px rgba(0,0,0,0.15);}
-    .portal-icon {width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); display:flex; align-items:center; justify-content:center; color:var(--islamic-gold); font-size:2rem; margin:0 auto 1.5rem; box-shadow:0 5px 15px rgba(10,92,54,0.2); transition:var(--transition);}
-    .portal-card:hover .portal-icon {transform:scale(1.1) rotate(5deg); background:linear-gradient(135deg,var(--dark-green),var(--islamic-green));}
-    .portal-title {color:var(--islamic-green); font-weight:700; margin-bottom:1rem; font-size:1.4rem; text-align:center;}
-    .portal-description {color:#666; text-align:center; margin-bottom:1.5rem; line-height:1.6;}
-    .form-container {background:white; border-radius:15px; padding:2.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:2px solid var(--islamic-gold); margin-bottom:2rem;}
-    .form-title {color:var(--islamic-green); font-weight:700; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:2px solid var(--islamic-gold); font-size:1.8rem; text-align:center;}
-    .form-label {color:var(--islamic-green); font-weight:600; margin-bottom:0.5rem; display:block;}
-    .form-label.required::after {content:" *"; color:#dc3545; font-weight:bold; margin-left:2px;}
-    .form-control {border:2px solid #e0e0e0; border-radius:8px; padding:0.75rem 1rem; transition:var(--transition); font-size:1rem;}
-    .form-control:focus {border-color:var(--islamic-gold); box-shadow:0 0 0 0.25rem rgba(193,154,63,0.25); outline:none;}
-    .form-step {background:rgba(248,243,230,0.5); border-radius:10px; padding:1.5rem; margin-bottom:1.5rem; border-left:4px solid var(--islamic-gold);}
-    .form-step-title {color:var(--islamic-green); font-weight:600; margin-bottom:1rem; font-size:1.2rem; display:flex; align-items:center; gap:10px;}
-    .form-step-title i {color:var(--islamic-gold);}
-    .file-upload-container {border:2px dashed var(--islamic-gold); border-radius:10px; padding:2rem; text-align:center; cursor:pointer; transition:var(--transition); background:rgba(248,243,230,0.3);}
-    .file-upload-container:hover {background:rgba(248,243,230,0.5); border-color:var(--dark-green);}
-    .file-preview {max-width:200px; max-height:200px; border-radius:8px; margin-top:1rem; border:2px solid var(--islamic-gold); display:none;}
-    .instructions-box {background:linear-gradient(135deg,rgba(10,92,54,0.05),rgba(193,154,63,0.05)); border-radius:15px; padding:1.5rem; border:2px solid var(--islamic-gold); margin:2rem 0;}
-    .instructions-title {color:var(--islamic-green); font-weight:700; margin-bottom:1rem; display:flex; align-items:center; gap:10px;}
-    .instructions-list {padding-left:1.5rem; margin-bottom:0;}
-    .instructions-list li {margin-bottom:0.5rem; color:#555; line-height:1.6;}
-    .timeline {position:relative; padding:2rem 0; margin:2rem 0;}
-    .timeline::before {content:''; position:absolute; left:0; right:0; top:50%; height:4px; background:linear-gradient(90deg,var(--islamic-green),var(--islamic-gold)); transform:translateY(-50%); z-index:1; border-radius:2px;}
-    .timeline-item {position:relative; margin-bottom:0; display:flex; justify-content:center; z-index:2;}
-    .timeline-content-box {background:white; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,0.1); padding:1.5rem; width:22%; max-width:300px; border:2px solid transparent; transition:var(--transition); position:relative; z-index:2; margin:0 10px;}
-    .timeline-content-box:hover {transform:translateY(-10px); border-color:var(--islamic-gold); box-shadow:0 15px 35px rgba(0,0,0,0.15);}
-    .timeline-content-box::before {content:''; position:absolute; top:100%; left:50%; width:20px; height:20px; border-radius:50%; background:white; border:3px solid var(--islamic-gold); box-shadow:0 0 0 3px var(--islamic-green); z-index:3; transition:var(--transition); transform:translate(-50%,-50%);}
-    .timeline-content-box:hover::before {transform:translate(-50%,-50%) scale(1.2); background:var(--islamic-gold);}
-    .timeline-date {color:var(--islamic-green); font-weight:700; font-size:1.1rem; padding:8px 15px; background:linear-gradient(135deg,rgba(10,92,54,0.1),rgba(193,154,63,0.1)); border-radius:20px; display:inline-block; margin-bottom:1rem; border:1px solid rgba(10,92,54,0.2);}
-    .timeline-content-box:hover .timeline-date {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); color:white; border-color:var(--islamic-gold);}
-    .timeline-icon {width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); display:flex; align-items:center; justify-content:center; color:white; font-size:1.25rem; margin-bottom:1rem; box-shadow:0 4px 10px rgba(10,92,54,0.2);}
-    .timeline-title {color:var(--islamic-green); font-size:1.3rem; font-weight:600; margin-bottom:0.75rem;}
-    .document-container {width:21cm; min-height:29.7cm; background:white; box-shadow:0 10px 30px rgba(0,0,0,0.1); border-radius:12px; overflow:hidden; margin:0 auto; position:relative;}
-    .document-watermark {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-45deg); font-size:60px; color:rgba(10,92,54,0.03); font-weight:bold; z-index:0; white-space:nowrap; pointer-events:none;}
-    .document-header {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); color:white; padding:20px; text-align:left; position:relative; display:flex; align-items:flex-start; justify-content:flex-start; gap:20px; border-bottom:5px solid var(--islamic-gold);}
-    .document-logo {width:120px; height:120px; border-radius:50%; border:3px solid white; box-shadow:0 4px 10px rgba(0,0,0,0.2); background:white; padding:3px; flex-shrink:0;}
-    .document-college-info {flex:1; display:flex; flex-direction:column; justify-content:center; text-align:left;}
-    .document-arabic {font-family:'Scheherazade New',serif; font-size:14px; font-weight:600; margin-bottom:2px; text-align:left;}
-    .document-college-name {font-size:16px; font-weight:700; margin-bottom:2px; text-align:left; color:white;}
-    .document-address {font-size:10px; margin-bottom:2px; text-align:left; color:rgba(255,255,255,0.9);}
-    .document-title {font-size:18px; font-weight:700; margin-top:8px; text-align:left; color:white; border-top:1px solid rgba(255,255,255,0.3); padding-top:8px;}
-    .document-content {padding:25px; position:relative; text-align:left; z-index:1;}
-    .document-footer {text-align:center; padding:10px; background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%); border-top:1px solid #dee2e6; margin-top:20px;}
-    .info-grid {display:grid; grid-template-columns: 235px 235px 235px; gap:8px;}
-    .info-grid1 {display:grid; grid-template-columns:repeat(2,1fr); gap:8px;}
-    .info-item {display:flex; padding:5px 0; border-bottom:1px dashed #dee2e6; text-align:left;}
-    .info-label {font-weight:600; color:#495057; width:120px; font-size:11px; line-height:1.2; text-align:left;}
-    .info-value {color:#212529; font-size:11px; flex:1; line-height:1.2; text-align:left;}
-    .document-section-title {font-size:14px; font-weight:600; color:var(--islamic-green); margin:8px 0 3px; padding-bottom:3px; border-bottom:1px solid #e9ecef; text-align:left;}
-    .document-declaration {background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%); border-radius:8px; padding:15px; margin-top:20px; border:1px solid #dee2e6;}
-    .document-signature-section {text-align:right; margin-top:20px; padding-top:10px; solid #ced4da;}
-    .document-signature-line {display:inline-block; width:250px; border-bottom:1px solid #212529; margin-bottom:3px;}
-    .student-info-box {background:#f8f9fa; border-radius:8px; padding:15px; margin-bottom:15px; border:1px solid #dee2e6;}
-    .exam-details-box {background:white; border:2px solid var(--islamic-green); border-radius:8px; padding:15px; margin:15px 0; max-width: 600px; display:flex; flex-direction:column;}
-    .exam-title {font-size:16px; font-weight:700; color:var(--islamic-green); text-align:center; margin-bottom:12px;}
-    .exam-info-grid {display:grid; grid-template-columns:repeat(2,1fr); gap:10px; flex:1;}
-    .exam-item {padding:8px; background:#f8f9fa; border-radius:6px; border:1px solid #dee2e6; display:flex; flex-direction:column; justify-content:center;}
-    .exam-label {font-weight:600; color:#495057; font-size:10px; margin-bottom:3px;}
-    .exam-value {font-size:14px; font-weight:700; color:var(--islamic-green);}
-    .exam-wrapper {display:grid; grid-template-columns:1fr auto; gap:15px; align-items:start;}
-    .signing-table {width:100%; border-collapse:collapse; margin:15px 0; border:2px solid var(--islamic-green); border-radius:6px; overflow:hidden;}
-    .signing-table th {background:var(--islamic-green); color:white; padding:8px; font-weight:600; font-size:12px; text-align:center;}
-    .signing-table td {padding:15px; text-align:center; border:1px solid #dee2e6; font-weight:500; color:#495057; height:60px; font-size:11px;}
-    .document-instructions {background:linear-gradient(135deg,#fff3cd 0%,#ffeaa7 100%); border-radius:8px; padding:15px; margin-top:15px; border:1px solid #ffc107;}
-    .document-instructions-title {font-size:16px; font-weight:700; color:#856404; margin-bottom:8px; text-align:center;}
-    .document-instructions-list {padding-left:20px; font-size:11px;}
-    .document-instructions-list li {margin-bottom:5px; color:#856404;}
-    .result-section-box {background:white; border:2px solid var(--islamic-green); border-radius:8px; padding:15px; margin:15px 0; text-align:center;}
-    .result-status {font-size:24px; font-weight:700; color:var(--islamic-green); margin-bottom:10px;}
-    .result-rank {font-size:16px; color:#6c757d; margin-bottom:10px;}
-    .admission-info-box {background:#e8f4ff; border-radius:6px; padding:12px; margin-top:15px; text-align:left;}
-    .admission-title {font-size:14px; font-weight:600; color:var(--islamic-green); margin-bottom:8px; text-align:center;}
-    .admission-row {margin-bottom:6px; display:flex; align-items:flex-start;}
-    .admission-label {font-weight:600; color:#495057; min-width:140px; font-size:11px; padding:2px 0;}
-    .admission-value {color:#212529; font-size:11px; flex:1; padding:2px 0;}
-    .note-section {background:#fff3cd; border-radius:6px; padding:12px; margin-top:12px; border-left:4px solid #ffc107;}
-    .note-title {font-size:12px; font-weight:600; color:#856404; margin-bottom:6px;}
-    .note-content {font-size:11px; color:#856404; line-height:1.4;}
-    @media print {body{padding:0 !important;background:white !important;margin:0 !important;} .document-container{width:21cm !important;min-height:29.7cm !important;box-shadow:none !important;border-radius:0 !important;margin:0 !important;page-break-after:always !important;} .no-print{display:none !important;} .navbar-optimized,.footer,.whatsapp-float,.page-header,.pattern-bg,.islamic-ornament,.content-section:not(.document-section),#mainContentArea{display:none !important;} #documentDisplayArea{display:block !important;width:100% !important;height:auto !important;position:static !important;} .document-container{break-inside:avoid !important;} @page{size:A4;margin:0.5cm;}}
-    .footer {background:linear-gradient(135deg,var(--dark-green),var(--islamic-green)); border-top:3px solid var(--islamic-gold); padding:3rem 0 1.5rem; color:white;}
-    .footer-brand {font-size:1.8rem; font-weight:700; color:var(--islamic-gold); margin-bottom:1rem;}
-    .social-links {display:flex; gap:12px; margin-top:1rem;}
-    .social-icon {width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:var(--transition); background:rgba(255,255,255,0.1); font-size:1.1rem;}
-    .social-icon:hover {transform:translateY(-5px); background:var(--islamic-gold); color:var(--islamic-green);}
-    .footer-links h5 {color:var(--islamic-gold); margin-bottom:1.2rem; font-size:1.1rem; font-weight:600;}
-    .footer-links a {display:block; color:rgba(255,255,255,0.85); text-decoration:none; margin-bottom:0.6rem; transition:var(--transition); font-size:0.95rem;}
-    .footer-links a:hover {color:var(--islamic-gold); padding-left:5px;}
-    .whatsapp-float {position:fixed; bottom:25px; right:15px; width:60px; height:60px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; box-shadow:0 10px 25px rgba(37,211,102,0.3); z-index:1000; animation:float 3s ease-in-out infinite; transition:var(--transition); text-decoration:none;}
-    .whatsapp-float:hover {transform:scale(1.1) rotate(10deg); box-shadow:0 15px 30px rgba(37,211,102,0.4);}
-    @keyframes float {0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);}}
-    .islamic-ornament {position:fixed; color:var(--islamic-gold); opacity:0.08; font-size:1.8rem; z-index:-1; pointer-events:none;}
-    .ornament-1 {top:20%; left:5%; animation:float 6s ease-in-out infinite;}
-    .ornament-2 {top:60%; right:5%; animation:float 8s ease-in-out infinite reverse;}
-    .ornament-3 {bottom:20%; left:10%; animation:float 7s ease-in-out infinite;}
-    @media (max-width:768px) {body{padding-top:70px !important;} .navbar-optimized{height:70px;padding:0.3rem 0;} .page-header{height:26vh;min-height:180px;} .page-title{font-size:2.2rem;} .page-subtitle{font-size:1.1rem;} .content-section{padding:2.5rem 0;} .section-title{font-size:1.8rem;} .navbar-collapse{background:var(--dark-green);padding:1rem;border-radius:0 0 10px 10px;border:1px solid var(--islamic-gold);margin-top:0px;max-height:70vh;overflow-y:auto;} .form-container{padding:1.5rem;} .portal-card{padding:1.5rem;} .document-container{width:100%;box-shadow:none;border-radius:0;} .timeline::before{left:20px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(180deg,var(--islamic-green),var(--islamic-gold));transform:none;} .timeline-item{justify-content:flex-start;margin-bottom:2.5rem;} .timeline-content-box{width:calc(100% - 60px);margin-left:40px;margin-right:0;} .timeline-content-box::before{top:50%;left:-35px;transform:translateY(-50%);} .timeline-content-box:hover::before{transform:translateY(-50%) scale(1.2);}}
-    @media (max-width:576px) {.page-title{font-size:1.8rem;} .section-title{font-size:1.5rem;} .portal-icon{width:60px;height:60px;font-size:1.5rem;}}
-    @media (min-width: 992px) {
-      .dropdown-submenu { position: relative; }
-      .dropdown-submenu:hover > .collapse { display: block !important; }
-      .dropdown-submenu .collapse { position: absolute; top: 0; left: 100%; z-index: 1000; min-width: 12rem; padding: 0.5rem 0; margin: 0; font-size: 1rem; background-color: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 0 0.5rem 0.5rem 0.5rem; }
-      .dropdown-submenu > a:after { content: "›"; float: right; margin-right: -0.5rem; font-size: 1.2rem; }
+    :root {
+      --islamic-green: #0a5c36;
+      --islamic-gold: #c19a3f;
+      --islamic-cream: #f8f3e6;
+      --islamic-light: #e9f5e9;
+      --dark-green: #064e3b;
+      --transition: all 0.3s ease;
     }
-    @media (max-width: 991px) {
-      .dropdown-submenu .collapse { position: static; width: auto; border: none; box-shadow: none; background: rgba(0,0,0,0.1);
-    margin-left: 1.2rem; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--islamic-cream);
+      color: #333;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      padding-top: 130px;
+    }
+    
+    a {
+      text-decoration: none;
+    }
+    
+    .arabic-font {
+      font-family: 'Scheherazade New', serif;
+    }
+    
+    .malayalam-font {
+      font-family: 'Anek Malayalam', sans-serif;
+    }
+    
+    .pattern-bg {
+      background-image: radial-gradient(circle at 25% 25%, rgba(10, 92, 54, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(193, 154, 63, 0.03) 2px, transparent 2px);
+      background-size: 50px 50px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .brand-text {
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+    
+    .brand-subtext {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+    
+    .ticker-container {
+      background: linear-gradient(90deg, var(--dark-green), var(--islamic-green));
+      color: white;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-bottom: 2px solid var(--islamic-gold);
+      height: 50px;
+      display: flex;
+      align-items: center;
+      z-index: 1030;
+      margin: 0;
+    }
+    
+    .ticker-wrapper {
+      white-space: nowrap;
+      display: inline-flex;
+      animation: ticker 50s linear infinite;
+      padding-left: 100%;
+    }
+    
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 30px;
+      font-size: 1rem;
+      position: relative;
+    }
+    
+    .ticker-badge {
+      background: var(--islamic-gold);
+      color: var(--islamic-green);
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-right: 10px;
+      white-space: nowrap;
+    }
+    
+    .ticker-item:after {
+      content: "•";
+      color: var(--islamic-gold);
+      position: absolute;
+      right: -10px;
+      font-size: 1.2rem;
+    }
+    
+    @keyframes ticker {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    
+    .page-header {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      color: white;
+      height: 30vh;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 5px solid var(--islamic-gold);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(193, 154, 63, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(10, 92, 54, 0.1) 0%, transparent 50%);
+    }
+    
+    .page-header-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .page-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--islamic-gold);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .page-subtitle {
+      font-size: 1.4rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--islamic-cream);
+    }
+    
+    .content-section {
+      padding: 4rem 0;
+      background: var(--islamic-cream);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding: 2rem 0;
+    }
+    
+    .section-title {
+      color: var(--islamic-green);
+      font-weight: 700;
+      display: inline-block;
+      padding: 0 1rem;
+      background: var(--islamic-cream);
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+    
+    .section-header::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent);
+      z-index: 1;
+    }
+    
+    .section-subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .btn-gold {
+      background: linear-gradient(135deg, var(--islamic-gold), #d4af37);
+      border: none;
+      color: var(--islamic-green);
+      font-weight: 600;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3);
+      transition: var(--transition);
+      padding: 0.75rem 1.5rem;
+    }
+    
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #d4af37, var(--islamic-gold));
+      box-shadow: 0 6px 20px rgba(193, 154, 63, 0.4);
+      transform: translateY(-2px);
+      color: var(--islamic-green);
+    }
+    
+    .btn-outline-gold {
+      border: 2px solid var(--islamic-gold);
+      color: var(--islamic-gold);
+      background: transparent;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .btn-outline-gold:hover {
+      background: var(--islamic-gold);
+      color: var(--islamic-green);
+    }
+    
+    .portal-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 2px solid transparent;
+      transition: var(--transition);
+      height: 100%;
+    }
+    
+    .portal-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--islamic-gold);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    
+    .portal-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--islamic-gold);
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 5px 15px rgba(10, 92, 54, 0.2);
+      transition: var(--transition);
+    }
+    
+    .portal-card:hover .portal-icon {
+      transform: scale(1.1) rotate(5deg);
+      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green));
+    }
+    
+    .portal-title {
+      color: var(--islamic-green);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+    
+    .portal-description {
+      color: #666;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .form-container {
+      background: white;
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 2px solid var(--islamic-gold);
+      margin-bottom: 2rem;
+    }
+    
+    .form-title {
+      color: var(--islamic-green);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--islamic-gold);
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    
+    .form-label {
+      color: var(--islamic-green);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .form-label.required::after {
+      content: " *";
+      color: #dc3545;
+      font-weight: bold;
+      margin-left: 2px;
+    }
+    
+    .form-control {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+    
+    .form-control:focus {
+      border-color: var(--islamic-gold);
+      box-shadow: 0 0 0 0.25rem rgba(193, 154, 63, 0.25);
+      outline: none;
+    }
+    
+    .form-step {
+      background: rgba(248, 243, 230, 0.5);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--islamic-gold);
+    }
+    
+    .form-step-title {
+      color: var(--islamic-green);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .form-step-title i {
+      color: var(--islamic-gold);
+    }
+    
+    .file-upload-container {
+      border: 2px dashed var(--islamic-gold);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      background: rgba(248, 243, 230, 0.3);
+    }
+    
+    .file-upload-container:hover {
+      background: rgba(248, 243, 230, 0.5);
+      border-color: var(--dark-green);
+    }
+    
+    .file-preview {
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 8px;
+      margin-top: 1rem;
+      border: 2px solid var(--islamic-gold);
+      display: none;
+    }
+    
+    .instructions-box {
+      background: linear-gradient(135deg, rgba(10, 92, 54, 0.05), rgba(193, 154, 63, 0.05));
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 2px solid var(--islamic-gold);
+      margin: 2rem 0;
+    }
+    
+    .instructions-title {
+      color: var(--islamic-green);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .instructions-list {
+      padding-left: 1.5rem;
+      margin-bottom: 0;
+    }
+    
+    .instructions-list li {
+      margin-bottom: 0.5rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+      margin: 2rem 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--islamic-green), var(--islamic-gold));
+      transform: translateY(-50%);
+      z-index: 1;
+      border-radius: 2px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 2;
+    }
+    
+    .timeline-content-box {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      width: 22%;
+      max-width: 300px;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      position: relative;
+      z-index: 2;
+      margin: 0 10px;
+    }
+    
+    .timeline-content-box:hover {
+      transform: translateY(-10px);
+      border-color: var(--islamic-gold);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    
+    .timeline-content-box::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--islamic-gold);
+      box-shadow: 0 0 0 3px var(--islamic-green);
+      z-index: 3;
+      transition: var(--transition);
+      transform: translate(-50%, -50%);
+    }
+    
+    .timeline-content-box:hover::before {
+      transform: translate(-50%, -50%) scale(1.2);
+      background: var(--islamic-gold);
+    }
+    
+    .timeline-date {
+      color: var(--islamic-green);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 8px 15px;
+      background: linear-gradient(135deg, rgba(10, 92, 54, 0.1), rgba(193, 154, 63, 0.1));
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(10, 92, 54, 0.2);
+    }
+    
+    .timeline-content-box:hover .timeline-date {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      color: white;
+      border-color: var(--islamic-gold);
+    }
+    
+    .timeline-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(10, 92, 54, 0.2);
+    }
+    
+    .timeline-title {
+      color: var(--islamic-green);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    
+    .document-container {
+      width: 21cm;
+      min-height: 29.7cm;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .document-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      font-size: 60px;
+      color: rgba(10, 92, 54, 0.03);
+      font-weight: bold;
+      z-index: 0;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    
+    .document-header {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      color: white;
+      padding: 20px;
+      text-align: left;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 20px;
+      border-bottom: 5px solid var(--islamic-gold);
+    }
+    
+    .document-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background: white;
+      padding: 3px;
+      flex-shrink: 0;
+    }
+    
+    .document-college-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+    
+    .document-arabic {
+      font-family: 'Scheherazade New', serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      text-align: left;
+    }
+    
+    .document-college-name {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      text-align: left;
+      color: white;
+    }
+    
+    .document-address {
+      font-size: 10px;
+      margin-bottom: 2px;
+      text-align: left;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .document-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 8px;
+      text-align: left;
+      color: white;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      padding-top: 8px;
+    }
+    
+    .document-content {
+      padding: 25px;
+      position: relative;
+      text-align: left;
+      z-index: 1;
+    }
+    
+    .document-footer {
+      text-align: center;
+      padding: 10px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-top: 1px solid #dee2e6;
+      margin-top: 20px;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: 235px 235px 235px;
+      gap: 8px;
+    }
+    
+    .info-grid1 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    
+    .info-item {
+      display: flex;
+      padding: 5px 0;
+      border-bottom: 1px dashed #dee2e6;
+      text-align: left;
+    }
+    
+    .info-label {
+      font-weight: 600;
+      color: #495057;
+      width: 120px;
+      font-size: 11px;
+      line-height: 1.2;
+      text-align: left;
+    }
+    
+    .info-value {
+      color: #212529;
+      font-size: 11px;
+      flex: 1;
+      line-height: 1.2;
+      text-align: left;
+    }
+    
+    .document-section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--islamic-green);
+      margin: 8px 0 3px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid #e9ecef;
+      text-align: left;
+    }
+    
+    .document-declaration {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+      border: 1px solid #dee2e6;
+    }
+    
+    .document-signature-section {
+      text-align: right;
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #ced4da;
+    }
+    
+    .document-signature-line {
+      display: inline-block;
+      width: 250px;
+      border-bottom: 1px solid #212529;
+      margin-bottom: 3px;
+    }
+    
+    .student-info-box {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #dee2e6;
+    }
+    
+    .exam-details-box {
+      background: white;
+      border: 2px solid var(--islamic-green);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .exam-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--islamic-green);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    
+    .exam-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      flex: 1;
+    }
+    
+    .exam-item {
+      padding: 8px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      border: 1px solid #dee2e6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .exam-label {
+      font-weight: 600;
+      color: #495057;
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+    
+    .exam-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--islamic-green);
+    }
+    
+    .exam-wrapper {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 15px;
+      align-items: start;
+    }
+    
+    .signing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      border: 2px solid var(--islamic-green);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .signing-table th {
+      background: var(--islamic-green);
+      color: white;
+      padding: 8px;
+      font-weight: 600;
+      font-size: 12px;
+      text-align: center;
+    }
+    
+    .signing-table td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #dee2e6;
+      font-weight: 500;
+      color: #495057;
+      height: 60px;
+      font-size: 11px;
+    }
+    
+    .document-instructions {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      border: 1px solid #ffc107;
+    }
+    
+    .document-instructions-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #856404;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .document-instructions-list {
+      padding-left: 20px;
+      font-size: 11px;
+    }
+    
+    .document-instructions-list li {
+      margin-bottom: 5px;
+      color: #856404;
+    }
+    
+    .result-section-box {
+      background: white;
+      border: 2px solid var(--islamic-green);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    
+    .result-status {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--islamic-green);
+      margin-bottom: 10px;
+    }
+    
+    .result-rank {
+      font-size: 16px;
+      color: #6c757d;
+      margin-bottom: 10px;
+    }
+    
+    .admission-info-box {
+      background: #e8f4ff;
+      border-radius: 6px;
+      padding: 12px;
+      margin-top: 15px;
+      text-align: left;
+    }
+    
+    .admission-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--islamic-green);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .admission-row {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .admission-label {
+      font-weight: 600;
+      color: #495057;
+      min-width: 140px;
+      font-size: 11px;
+      padding: 2px 0;
+    }
+    
+    .admission-value {
+      color: #212529;
+      font-size: 11px;
+      flex: 1;
+      padding: 2px 0;
+    }
+    
+    .note-section {
+      background: #fff3cd;
+      border-radius: 6px;
+      padding: 12px;
+      margin-top: 12px;
+      border-left: 4px solid #ffc107;
+    }
+    
+    .note-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #856404;
+      margin-bottom: 6px;
+    }
+    
+    .note-content {
+      font-size: 11px;
+      color: #856404;
+      line-height: 1.4;
+    }
+    
+    @media print {
+      body {
+        padding: 0 !important;
+        background: white !important;
+        margin: 0 !important;
+      }
+      
+      .document-container {
+        width: 21cm !important;
+        min-height: 29.7cm !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        page-break-after: always !important;
+      }
+      
+      .no-print {
+        display: none !important;
+      }
+      
+      .footer,
+      .whatsapp-float,
+      .page-header,
+      .pattern-bg,
+      .islamic-ornament,
+      .content-section:not(.document-section),
+      #mainContentArea {
+        display: none !important;
+      }
+      
+      #documentDisplayArea {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        position: static !important;
+      }
+      
+      .document-container {
+        break-inside: avoid !important;
+      }
+      
+      @page {
+        size: A4;
+        margin: 0.5cm;
+      }
+    }
+    
+    .footer {
+      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green));
+      border-top: 3px solid var(--islamic-gold);
+      padding: 3rem 0 1.5rem;
+      color: white;
+    }
+    
+    .footer-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--islamic-gold);
+      margin-bottom: 1rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 1rem;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 1.1rem;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+      background: var(--islamic-gold);
+      color: var(--islamic-green);
+    }
+    
+    .footer-links h5 {
+      color: var(--islamic-gold);
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .footer-links a {
+      display: block;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+    
+    .footer-links a:hover {
+      color: var(--islamic-gold);
+      padding-left: 5px;
+    }
+    
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 15px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      animation: float 3s ease-in-out infinite;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+    
+    .islamic-ornament {
+      position: fixed;
+      color: var(--islamic-gold);
+      opacity: 0.08;
+      font-size: 1.8rem;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .ornament-1 {
+      top: 20%;
+      left: 5%;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .ornament-2 {
+      top: 60%;
+      right: 5%;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+    
+    .ornament-3 {
+      bottom: 20%;
+      left: 10%;
+      animation: float 7s ease-in-out infinite;
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding-top: 90px !important; 
+      }
+      
+      .page-header {
+        height: 26vh;
+        min-height: 180px;
+      }
+      
+      .page-title {
+        font-size: 2.2rem;
+      }
+      
+      .page-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .content-section {
+        padding: 2.5rem 0;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .form-container {
+        padding: 1.5rem;
+      }
+      
+      .portal-card {
+        padding: 1.5rem;
+      }
+      
+      .document-container {
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+      }
+      
+      .timeline::before {
+        left: 20px;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        height: auto;
+        background: linear-gradient(180deg, var(--islamic-green), var(--islamic-gold));
+        transform: none;
+      }
+      
+      .timeline-item {
+        justify-content: flex-start;
+        margin-bottom: 2.5rem;
+      }
+      
+      .timeline-content-box {
+        width: calc(100% - 60px);
+        margin-left: 40px;
+        margin-right: 0;
+      }
+      
+      .timeline-content-box::before {
+        top: 50%;
+        left: -35px;
+        transform: translateY(-50%);
+      }
+      
+      .timeline-content-box:hover::before {
+        transform: translateY(-50%) scale(1.2);
+      }
+
+      .ticker-container {
+        height: 40px;
+      }
+      
+      .ticker-wrapper {
+        animation-duration: 40s;
+      }
+      
+      .ticker-item {
+        padding: 0 15px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .page-title {
+        font-size: 1.8rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .portal-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+<div class="pattern-bg"></div>
 <div class="islamic-ornament ornament-1">✸</div>
 <div class="islamic-ornament ornament-2">✸</div>
 <div class="islamic-ornament ornament-3">✸</div>
-<div id="navbar-container"></div>
+
+<div class="ticker-container">
+  <div class="ticker-wrapper">
+    <div class="ticker-item">
+      <span class="ticker-badge">⚠ IMPORTANT</span>
+      Admission booking started! Contact now.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">📢 NEWS</span>
+      വാര്‍ഷിക പരീക്ഷ 2026 ഫെബ്രുവരി 14,15 തിയ്യതികളില്‍.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">🎉 EVENT</span>
+      സമസ്ത നൂറാം വാര്‍ഷികം 2026 ഫെബ്രുവരി 4-8 തിയ്യതികളില്‍ കാസര്‍ഗോഡ് കുണിയയില്‍.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">✨ UPDATED</span>
+      <strong>21-02-2026 ബുധന്‍ AMCT വെബ്‌സൈറ്റ് ലോഞ്ച് ചെയ്തു.</strong>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">⚠ IMPORTANT</span>
+      Admission booking started! Contact now.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">📢 NEWS</span>
+      വാര്‍ഷിക പരീക്ഷ 2026 ഫെബ്രുവരി 14,15 തിയ്യതികളില്‍.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">🎉 EVENT</span>
+      സമസ്ത നൂറാം വാര്‍ഷികം 2026 ഫെബ്രുവരി 4-8 തിയ്യതികളില്‍ കാസര്‍ഗോഡ് കുണിയയില്‍.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">✨ UPDATED</span>
+      <strong>21-02-2026 ബുധന്‍ AMCT വെബ്‌സൈറ്റ് ലോഞ്ച് ചെയ്തു.</strong>
+    </div>
+  </div>
+</div>
+
 <div class="page-header">
   <div class="container">
     <div class="page-header-content">
@@ -169,6 +1215,7 @@
     </div>
   </div>
 </div>
+
 <div class="instructions-box m-5" data-aos="fade-up">
   <h3 class="instructions-title"><i class="fas fa-info-circle"></i>Important Instructions</h3>
   <ul class="instructions-list">
@@ -179,6 +1226,7 @@
     <li>For any queries, contact: +91 9048020243</li>
   </ul>
 </div>
+
 <div id="mainContentArea">
   <section class="content-section">
     <div class="container">
@@ -215,6 +1263,7 @@
       </div>
     </div>
   </section>
+
   <section class="content-section" style="background: white;">
     <div class="container">
       <div class="row g-4">
@@ -256,6 +1305,7 @@
       </div>
     </div>
   </section>
+
   <section class="content-section" id="applyNowFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -442,8 +1492,8 @@
                   <div class="mb-3">
                     പ്രധാന അദ്ധ്യാപകന്‍റെ ഫോണ്‍ നമ്പര്‍ | Head Teacher's Phone Number:
                     <input type="tel" class="form-control" name="headTeacherPhone" placeholder="9876543210 | Enter phone number" pattern="\d{10}" title="Phone number must be 10 digits">
+                  </div>
                 </div>
-               </div>
               </div>
             </div>
           </div>
@@ -502,6 +1552,7 @@
       </div>
     </div>
   </section>
+
   <section class="content-section" id="applicationFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -523,6 +1574,7 @@
       </div>
     </div>
   </section>
+
   <section class="content-section" id="hallticketFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -544,6 +1596,7 @@
       </div>
     </div>
   </section>
+
   <section class="content-section" id="resultFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -566,168 +1619,668 @@
     </div>
   </section>
 </div>
+
 <div id="documentDisplayArea" style="display: none;"></div>
-<div id="footer-container"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzp_ALU42dr81AANE8TrMF7XO0BOqBOfU1mZt-58fJkZfXxlwaJJXG0X243PlZaZWolgg/exec';
-  document.addEventListener('DOMContentLoaded', function() {initializePage();});
-  function initializePage() {
-    AOS.init({duration:800,once:true,offset:50,disable:window.innerWidth<768});
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    const today=new Date().toISOString().split('T')[0];document.querySelectorAll('input[type="date"]').forEach(input=>{input.setAttribute('max',today);});
-    window.addEventListener('scroll',function(){const navbar=document.querySelector('.navbar-optimized');const scrollTop=window.pageYOffset||document.documentElement.scrollTop;navbar.classList.toggle('scrolled',scrollTop>50);});
-  }
-  function showDashboard() {
-    document.getElementById('mainContentArea').style.display='block';document.getElementById('documentDisplayArea').style.display='none';document.getElementById('documentDisplayArea').innerHTML='';
-    document.querySelectorAll('[id$="Section"]').forEach(section=>{if(section.id!=='mainContentArea'){section.style.display='none';}});
-    document.querySelectorAll('.content-section').forEach(section=>{if(!section.id.includes('FormSection')&&!section.id.includes('DisplayArea')){section.style.display='block';}});
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  function showForm(formId) {
-    document.getElementById('mainContentArea').style.display='block';document.getElementById('documentDisplayArea').style.display='none';document.getElementById('documentDisplayArea').innerHTML='';
-    document.querySelectorAll('[id$="Section"]').forEach(section=>{section.style.display='none';});
-    const formSection=document.getElementById(formId+'Section');if(formSection){formSection.style.display='block';window.scrollTo({top:formSection.offsetTop-20,behavior:'smooth'});}
-  }
-  function calculateAge(dobString) {
-    if(!dobString)return;const birthDate=new Date(dobString);const today=new Date();let years=today.getFullYear()-birthDate.getFullYear();let months=today.getMonth()-birthDate.getMonth();let days=today.getDate()-birthDate.getDate();if(days<0){months--;days+=new Date(today.getFullYear(),today.getMonth(),0).getDate();}if(months<0){years--;months+=12;}document.getElementById('ageDisplay').textContent=`Age: ${years} years ${months} months ${days} days`;
-  }
-  function togglePreviousStudy(show){document.getElementById('previous-study-section').style.display=show?'block':'none';}
-  function toggleIllnessSection(show){document.getElementById('illness-section').style.display=show?'block':'none';}
-  function toggleSubmitButton(enabled){document.getElementById('submitApplicationBtn').disabled=!enabled;}
-  function handleDragOver(e){e.preventDefault();e.stopPropagation();document.getElementById('fileUploadContainer').classList.add('dragover');}
-  function handleDragLeave(e){e.preventDefault();e.stopPropagation();document.getElementById('fileUploadContainer').classList.remove('dragover');}
-  function handleDrop(e){e.preventDefault();e.stopPropagation();document.getElementById('fileUploadContainer').classList.remove('dragover');const files=e.dataTransfer.files;if(files.length>0){handleFile(files[0]);}}
-  function handlePhotoUpload(e){const file=e.target.files[0];if(file){handleFile(file);}}
-  function handleFile(file){if(!file.type.startsWith('image/')){return;}if(file.size>5*1024*1024){return;}
-    const reader=new FileReader();reader.onload=function(e){const preview=document.getElementById('photoPreview');preview.src=e.target.result;preview.style.display='block';};reader.readAsDataURL(file);}
-  function readFileAsBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file);});}
-  function generateApplicationHtml(data) {
-  const { collegeInfo, studentData } = data;
-  const hasValidPhoto = studentData.photoUrl && (
-    studentData.photoUrl.includes('drive.google.com') ||
-    studentData.photoUrl.startsWith('data:image') ||
-    studentData.photoUrl.startsWith('http')
-  );
-  return `
-<div class="document-container">
-  <div class="document-watermark">APPLICATION FORM</div>
-  <div class="document-header">
-    <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
-    <div class="document-college-info">
-      <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
-      <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
-      <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
-      <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
-      <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-      <div class="document-title">Admission Application Form</div>
-    </div>
-  </div>
-  <div class="document-content">
-    ${hasValidPhoto ? `
-      <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
-        <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
-          <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
-        </div>
-        <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
-      </div>
-    ` : ''}
-    <div class="document-section-title">1. Personal Information</div><div class="info-grid1" style="margin-right: ${hasValidPhoto?'160px':'0'};">${['Application Date','Application ID',"1. Student's Name","2. House Name","3. Date of Birth","4. Aadhaar Number","5. Address","6. Phone Number","7. WhatsApp Number"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.submissionDate||new Date().toLocaleDateString(),studentData.applicationId||'N/A',studentData.studentName||studentData.name||'N/A',studentData.houseName||'N/A',studentData.dob||'N/A',studentData.aadhaarNumber||'N/A',studentData.address||'N/A',studentData.phoneNumber||studentData.mobile||'N/A',studentData.whatsappNumber||'N/A'][i])}</span></div>`).join('')}</div>
-    <div class="document-section-title">2. Parent/Guardian Information</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["8. Father's Name","9. Father's Occupation","10. Guardian's Name","11. Relationship with Guardian"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.fatherName||'N/A',studentData.fatherOccupation||'N/A',studentData.guardianName||'N/A',studentData.relationshipWithGuardian||'N/A'][i])}</span></div>`).join('')}${studentData.guardianReason?`<div class="info-item"><span class="info-label">12. Reason if Guardian is not Father:</span><span class="info-value">${escapeHtml(studentData.guardianReason)}</span></div>`:''}</div>
-    <div class="document-section-title">3. Educational Information</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.madrasa||'N/A',studentData.madrasaclass||'N/A',studentData.school||'N/A',studentData.schoolclass||'N/A',studentData.previousStudy||'No'][i])}</span></div>`).join('')}</div>${studentData.previousStudy==='Yes'?`<div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${studentData.previousInstitution?`<div class="info-item"><span class="info-label">Previous Institution:</span><span class="info-value">${escapeHtml(studentData.previousInstitution||'N/A')}</span></div>`:''}${studentData.studyDuration?`<div class="info-item"><span class="info-label">Duration of Study:</span><span class="info-value">${escapeHtml(studentData.studyDuration||'N/A')}</span></div>`:''}${studentData.juzCount ? `<div class="info-item"><span class="info-label">Number of Juz:</span><span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span></div>` : ''}${studentData.reasonForLeaving ? `<div class="info-item"><span class="info-label">Reason for Leaving:</span><span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span></div>` : ''}${studentData.headTeacherPhone ? `<div class="info-item"><span class="info-label">Head Teacher's Phone Number:</span><span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span></div>` : ''}</div>` : ''}
-    <div class="document-section-title">4. Medical & Identification</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["16. Identification Mark","17. Physical Fitness"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.identificationMark||'N/A',studentData.physicalFitness||'N/A'][i])}</span></div>`).join('')}${studentData.illness?`<div class="info-item"><span class="info-label">Illness:</span><span class="info-value">${escapeHtml(studentData.illness)}</span></div>`:''}</div>
-    <div class="document-declaration">
-      <h3 class="document-section-title">Declaration</h3>
-      <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
-        <strong>${escapeHtml(studentData.studentName || studentData.name || '')}</strong> S/o
-        <strong>${escapeHtml(studentData.guardianName || '')}</strong>,
-        എന്ന എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
-      </p>
-            <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
-        <!-- Left side: Date & Place – no underline -->
-        <div style="flex: 0 0 auto;">
-          <div style="margin-bottom: 14px;">
-            Date: ______________________________
-          </div>
-          <div>
-            Place: _____________________________
-          </div>
-        </div>
-        <!-- Right side: Signature -->
-        <div style="text-align: right; flex: 1;">
-          <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
-          <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
-        </div>
-      </div>
-    </div>
-  </div>
-    <div class="document-footer">
-      <p style="color:#495057;font-size:10px;margin:0;">
-        <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
-      </p>
-    </div>
-    </div>
-<div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-  <button onclick="window.print()" class="btn-gold me-2">
-    <i class="fas fa-print me-2"></i> Print Application Form
-  </button>
-  <button onclick="showDashboard()" class="btn-outline-gold">
-    <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-  </button>
-</div>
-  `;
-}
- 
-  function generateHallticketHtml(data){const{collegeInfo,studentData}=data;const hasValidPhoto=studentData.photoUrl&&(studentData.photoUrl.includes('drive.google.com')||studentData.photoUrl.startsWith('data:image')||studentData.photoUrl.startsWith('http'));
-    const qrText=`Name: ${studentData.studentName||studentData.name||''}, Register No: ${studentData.registerNo||studentData.applicationId||''}, DoB: ${studentData.dob||''}, Exam Date: 15/02/2026, Venue: HIM Puthanpalli`;const qrCodeUrl=`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
-    return `<div class="document-container"><div class="document-watermark">HALL TICKET</div><div class="document-header"><img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo"><div class="document-college-info"><div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div><div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div><div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div><div class="document-address">Under QUWATHUL ISLAM SANGAM</div><div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div><div class="document-title">Entrance Exam Hall Ticket</div></div></div><div class="document-content">${hasValidPhoto?`<div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;"><div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;"><img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo"></div><div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div></div>`:''}
-    <div class="student-info-box" style="margin-right: ${hasValidPhoto?'150px':'0'};"><div class="info-grid1">${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study'].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.registerNo||studentData.applicationId||'N/A',studentData.studentName||studentData.name||'N/A',studentData.dob||'N/A',studentData.age||'N/A',studentData.phoneNumber||studentData.mobile||'N/A',studentData.houseName||'N/A',studentData.address||'N/A',studentData.previousStudy||'N/A'][i])}</span></div>`).join('')}</div></div>
-    <div class="exam-wrapper"><div class="exam-details-box"><div class="exam-title">Examination Details</div><div class="exam-info-grid">${['Exam Date','Reporting Time','Exam Duration','Venue'].map((label,i)=>`<div class="exam-item"><div class="exam-label">${label}</div><div class="exam-value">${['15 Febrary 2026','07:30 AM','08:00 AM - 12:30 PM','HIM Puthanpalli'][i]}</div></div>`).join('')}</div></div><div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;"><div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;"><img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code"></div><div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div></div></div><table class="signing-table"><thead><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody><tr><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td></tr></tbody></table><div class="document-instructions"><div class="document-instructions-title">Important Instructions</div><ul class="document-instructions-list"><li>Bring this hall ticket to the exam center</li><li>Carry any original ID proof (Aadhaar card)</li><li>Report at the exam center 30 minutes before exam time</li><li>No electronic devices allowed inside exam hall</li><li>Only blue/black ballpoint pens are allowed</li><li>Follow all instructions given by invigilators</li></ul></div></div><div class="document-footer"><p style="color:#495057;font-size:10px;margin:0;"><strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com</p></div></div><div class="no-print" style="text-align:center;margin-top:20px;padding:20px;"><button onclick="window.print()" class="btn-gold me-2"><i class="fas fa-print me-2"></i> Print Hall Ticket</button><button onclick="showDashboard()" class="btn-outline-gold"><i class="fas fa-arrow-left me-2"></i> Back to Dashboard</button></div>`;}
-  function generateResultHtml(data){const{collegeInfo,studentData}=data;let statusText="NOT QUALIFIED",statusColor="#dc3545";if(studentData.result==="QUALIFIED"){statusText="QUALIFIED";statusColor="#28a745";}else if(studentData.result==="WAITING LIST"){statusText="WAITING LIST";statusColor="#007bff";}const isQualified=studentData.result==="QUALIFIED";const isWaitingList=studentData.result==="WAITING LIST";const isQualifiedOrWaiting=isQualified||isWaitingList;
-                                    
-    return `<div class="document-container"><div class="document-watermark">${statusText}</div><div class="document-header"><img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo"><div class="document-college-info"><div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div><div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div><div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div><div class="document-address">Under QUWATHUL ISLAM SANGAM</div><div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div><div class="document-title">Entrance Exam Result</div></div></div><div class="document-content"><div class="student-info-box"><div class="info-grid">${['Student Name','Mobile Number','Date of Birth','Result Status'].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.name||studentData.studentName||'N/A',studentData.mobile||studentData.phoneNumber||'N/A',studentData.dob||'N/A',statusText][i])}</span></div>`).join('')}</div></div><div class="result-section-box" style="border-color: ${statusColor};"><div class="result-status" style="color: ${statusColor};">${statusText}</div>${isQualifiedOrWaiting?`<div class="result-rank">Rank: ${escapeHtml(studentData.rank||'N/A')}</div>`:''}${isQualified?`<div class="admission-info-box"><div class="admission-title">Admission Details</div><div class="admission-row"><span class="admission-label">Admission Starts:</span><span class="admission-value">Announce Later</span></div><div class="admission-row"><span class="admission-label">Class Starts:</span><span class="admission-value">Announce Later</span></div></div>`:''}<div class="note-section" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;"><div class="note-title">Important Note</div><div class="note-content">Selected candidates must complete admission formalities within the specified dates. Bring all original documents for verification. For any queries, contact college office.</div></div></div></div><div class="document-footer"><p style="color:#495057;font-size:10px;margin:0;"><strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com</p></div></div><div class="no-print" style="text-align:center;margin-top:20px;padding:20px;"><button onclick="window.print()" class="btn-gold me-2"><i class="fas fa-print me-2"></i> Print Result</button><button onclick="showDashboard()" class="btn-outline-gold"><i class="fas fa-arrow-left me-2"></i> Back to Dashboard</button></div>`;}
-  function displayDocument(htmlContent){document.getElementById('mainContentArea').style.display='none';document.getElementById('documentDisplayArea').style.display='block';document.getElementById('documentDisplayArea').innerHTML=htmlContent;window.scrollTo({top:0,behavior:'smooth'});}
-  async function handleApplicationSubmit(e){e.preventDefault();const mobile=document.getElementById('appMobile').value.trim();const dob=document.getElementById('appDob').value;
-    try{const response=await fetch(`${SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateApplicationHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
-  async function handleHallticketSubmit(e){e.preventDefault();const mobile=document.getElementById('ticketMobile').value.trim();const dob=document.getElementById('ticketDob').value;
-    try{const response=await fetch(`${SCRIPT_URL}?type=hallticket&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateHallticketHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
-  async function handleResultSubmit(e){e.preventDefault();const mobile=document.getElementById('resultMobile').value.trim();const dob=document.getElementById('resultDob').value;
-    try{const response=await fetch(`${SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateResultHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
-  async function handleNewApplicationSubmit(e){e.preventDefault();const form=e.target;const formData=new FormData(form);const data=Object.fromEntries(formData.entries());const photoFile=document.getElementById('photoInput').files[0];if(photoFile){try{const photoData=await readFileAsBase64(photoFile);data.photo=JSON.stringify({name:photoFile.name,mimeType:photoFile.type,data:photoData.split(',')[1]});}catch(error){return;}}
-    const submitData=new URLSearchParams();for(const[key,value]of Object.entries(data)){if(value!==undefined&&value!==null){submitData.append(key,value);}}
-    try{const response=await fetch(SCRIPT_URL,{method:'POST',body:submitData,headers:{'Content-Type':'application/x-www-form-urlencoded'}});const result=await response.json();if(result.status==='success'){form.reset();document.getElementById('photoPreview').style.display='none';toggleSubmitButton(false);setTimeout(()=>{const mockData={collegeInfo:{logo:'https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png',contact:'كلية الحافظ ممو ملا لتحفيظ القرآن',collegeName:'AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN',underOrg:'Under QUWATHUL ISLAM SANGAM',affiliation:'Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD',address:'Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District'},studentData:{...data,submissionDate:new Date().toLocaleDateString(),applicationId:result.data.applicationId||'APP-'+Date.now(),photoUrl:photoFile?URL.createObjectURL(photoFile):null}};const html=generateApplicationHtml(mockData);displayDocument(html);},1500);}else{}}catch(error){console.error('Submission error:',error);}}
-  function escapeHtml(text){if(!text)return'';const map={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};return String(text).replace(/[&<>"']/g,function(m){return map[m];});}
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
-      toggle.addEventListener('click', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      });
-    });
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    initializePage();
   });
-</script>
-<script>
-  fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navbar-container').innerHTML = data;
-      document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
-        toggle.addEventListener('click', function (e) {
-          e.stopPropagation();
-          e.preventDefault();
-          const target = document.querySelector(toggle.getAttribute('data-bs-target'));
-          const bsCollapse = new bootstrap.Collapse(target, { toggle: true });
+  
+  let lastScrollTop = 0;
+  
+  function initializePage() {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 50,
+      disable: window.innerWidth < 768
+    });
+    
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll('input[type="date"]').forEach(input => {
+      input.setAttribute('max', today);
+    });
+  }
+  
+  function showDashboard() {
+    document.getElementById('mainContentArea').style.display = 'block';
+    document.getElementById('documentDisplayArea').style.display = 'none';
+    document.getElementById('documentDisplayArea').innerHTML = '';
+    
+    document.querySelectorAll('[id$="Section"]').forEach(section => {
+      if (section.id !== 'mainContentArea') {
+        section.style.display = 'none';
+      }
+    });
+    
+    document.querySelectorAll('.content-section').forEach(section => {
+      if (!section.id.includes('FormSection') && !section.id.includes('DisplayArea')) {
+        section.style.display = 'block';
+      }
+    });
+    
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  
+  function showForm(formId) {
+    document.getElementById('mainContentArea').style.display = 'block';
+    document.getElementById('documentDisplayArea').style.display = 'none';
+    document.getElementById('documentDisplayArea').innerHTML = '';
+    
+    document.querySelectorAll('[id$="Section"]').forEach(section => {
+      section.style.display = 'none';
+    });
+    
+    const formSection = document.getElementById(formId + 'Section');
+    if (formSection) {
+      formSection.style.display = 'block';
+      window.scrollTo({top: formSection.offsetTop - 20, behavior: 'smooth'});
+    }
+  }
+  
+  function calculateAge(dobString) {
+    if (!dobString) return;
+    const birthDate = new Date(dobString);
+    const today = new Date();
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+    
+    if (days < 0) {
+      months--;
+      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+    
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+    
+    document.getElementById('ageDisplay').textContent = `Age: ${years} years ${months} months ${days} days`;
+  }
+  
+  function togglePreviousStudy(show) {
+    document.getElementById('previous-study-section').style.display = show ? 'block' : 'none';
+  }
+  
+  function toggleIllnessSection(show) {
+    document.getElementById('illness-section').style.display = show ? 'block' : 'none';
+  }
+  
+  function toggleSubmitButton(enabled) {
+    document.getElementById('submitApplicationBtn').disabled = !enabled;
+  }
+  
+  function handleDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('fileUploadContainer').classList.add('dragover');
+  }
+  
+  function handleDragLeave(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('fileUploadContainer').classList.remove('dragover');
+  }
+  
+  function handleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('fileUploadContainer').classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      handleFile(files[0]);
+    }
+  }
+  
+  function handlePhotoUpload(e) {
+    const file = e.target.files[0];
+    if (file) {
+      handleFile(file);
+    }
+  }
+  
+  function handleFile(file) {
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file');
+      return;
+    }
+    
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const preview = document.getElementById('photoPreview');
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+  
+  function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+  
+  function generateApplicationHtml(data) {
+    const { collegeInfo, studentData } = data;
+    const hasValidPhoto = studentData.photoUrl && (
+      studentData.photoUrl.includes('drive.google.com') ||
+      studentData.photoUrl.startsWith('data:image') ||
+      studentData.photoUrl.startsWith('http')
+    );
+    
+    return `
+      <div class="document-container">
+        <div class="document-watermark">APPLICATION FORM</div>
+        <div class="document-header">
+          <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Admission Application Form</div>
+          </div>
+        </div>
+        <div class="document-content">
+          ${hasValidPhoto ? `
+            <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
+              <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+                <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
+              </div>
+              <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
+            </div>
+          ` : ''}
+          <div class="document-section-title">1. Personal Information</div>
+          <div class="info-grid1" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${['Application Date','Application ID',"1. Student's Name","2. House Name","3. Date of Birth","4. Aadhaar Number","5. Address","6. Phone Number","7. WhatsApp Number"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.submissionDate || new Date().toLocaleDateString(), studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', studentData.houseName || 'N/A', studentData.dob || 'N/A', studentData.aadhaarNumber || 'N/A', studentData.address || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.whatsappNumber || 'N/A'][i])}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="document-section-title">2. Parent/Guardian Information</div>
+          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${["8. Father's Name","9. Father's Occupation","10. Guardian's Name","11. Relationship with Guardian"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.fatherName || 'N/A', studentData.fatherOccupation || 'N/A', studentData.guardianName || 'N/A', studentData.relationshipWithGuardian || 'N/A'][i])}</span>
+              </div>
+            `).join('')}
+            ${studentData.guardianReason ? `
+              <div class="info-item">
+                <span class="info-label">12. Reason if Guardian is not Father:</span>
+                <span class="info-value">${escapeHtml(studentData.guardianReason)}</span>
+              </div>
+            ` : ''}
+          </div>
+          <div class="document-section-title">3. Educational Information</div>
+          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.madrasa || 'N/A', studentData.madrasaclass || 'N/A', studentData.school || 'N/A', studentData.schoolclass || 'N/A', studentData.previousStudy || 'No'][i])}</span>
+              </div>
+            `).join('')}
+          </div>
+          ${studentData.previousStudy === 'Yes' ? `
+            <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+              ${studentData.previousInstitution ? `
+                <div class="info-item">
+                  <span class="info-label">Previous Institution:</span>
+                  <span class="info-value">${escapeHtml(studentData.previousInstitution || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.studyDuration ? `
+                <div class="info-item">
+                  <span class="info-label">Duration of Study:</span>
+                  <span class="info-value">${escapeHtml(studentData.studyDuration || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.juzCount ? `
+                <div class="info-item">
+                  <span class="info-label">Number of Juz:</span>
+                  <span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.reasonForLeaving ? `
+                <div class="info-item">
+                  <span class="info-label">Reason for Leaving:</span>
+                  <span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.headTeacherPhone ? `
+                <div class="info-item">
+                  <span class="info-label">Head Teacher's Phone Number:</span>
+                  <span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span>
+                </div>
+              ` : ''}
+            </div>
+          ` : ''}
+          <div class="document-section-title">4. Medical & Identification</div>
+          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${["16. Identification Mark","17. Physical Fitness"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.identificationMark || 'N/A', studentData.physicalFitness || 'N/A'][i])}</span>
+              </div>
+            `).join('')}
+            ${studentData.illness ? `
+              <div class="info-item">
+                <span class="info-label">Illness:</span>
+                <span class="info-value">${escapeHtml(studentData.illness)}</span>
+              </div>
+            ` : ''}
+          </div>
+          <div class="document-declaration">
+            <h3 class="document-section-title">Declaration</h3>
+            <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
+              <strong>${escapeHtml(studentData.studentName || studentData.name || '')}</strong> S/o
+              <strong>${escapeHtml(studentData.guardianName || '')}</strong>,
+              എന്ന എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
+            </p>
+            <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
+              <div style="flex: 0 0 auto;">
+                <div style="margin-bottom: 14px;">Date: ______________________________</div>
+                <div>Place: _____________________________</div>
+              </div>
+              <div style="text-align: right; flex: 1;">
+                <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
+                <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
+          </p>
+        </div>
+      </div>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Application Form
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
+      </div>
+    `;
+  }
+  
+  function generateHallticketHtml(data) {
+    const { collegeInfo, studentData } = data;
+    const hasValidPhoto = studentData.photoUrl && (
+      studentData.photoUrl.includes('drive.google.com') ||
+      studentData.photoUrl.startsWith('data:image') ||
+      studentData.photoUrl.startsWith('http')
+    );
+    
+    const qrText = `Name: ${studentData.studentName || studentData.name || ''}, Register No: ${studentData.registerNo || studentData.applicationId || ''}, DoB: ${studentData.dob || ''}, Exam Date: 15/02/2026, Venue: HIM Puthanpalli`;
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
+    
+    return `
+      <div class="document-container">
+        <div class="document-watermark">HALL TICKET</div>
+        <div class="document-header">
+          <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Entrance Exam Hall Ticket</div>
+          </div>
+        </div>
+        <div class="document-content">
+          ${hasValidPhoto ? `
+            <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
+              <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+                <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
+              </div>
+              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
+            </div>
+          ` : ''}
+          <div class="student-info-box" style="margin-right: ${hasValidPhoto ? '150px' : '0'};">
+            <div class="info-grid1">
+              ${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study'].map((label, i) => `
+                <div class="info-item">
+                  <span class="info-label">${label}:</span>
+                  <span class="info-value">${escapeHtml([studentData.registerNo || studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', studentData.dob || 'N/A', studentData.age || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.houseName || 'N/A', studentData.address || 'N/A', studentData.previousStudy || 'N/A'][i])}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="exam-wrapper">
+            <div class="exam-details-box">
+              <div class="exam-title">Examination Details</div>
+              <div class="exam-info-grid">
+                ${['Exam Date','Reporting Time','Exam Duration','Venue'].map((label, i) => `
+                  <div class="exam-item">
+                    <div class="exam-label">${label}</div>
+                    <div class="exam-value">${['15 February 2026','07:30 AM','08:00 AM - 12:30 PM','HIM Puthanpalli'][i]}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
+              <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
+                <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code">
+              </div>
+              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div>
+            </div>
+          </div>
+          <table class="signing-table">
+            <thead>
+              <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="document-instructions">
+            <div class="document-instructions-title">Important Instructions</div>
+            <ul class="document-instructions-list">
+              <li>Bring this hall ticket to the exam center</li>
+              <li>Carry any original ID proof (Aadhaar card)</li>
+              <li>Report at the exam center 30 minutes before exam time</li>
+              <li>No electronic devices allowed inside exam hall</li>
+              <li>Only blue/black ballpoint pens are allowed</li>
+              <li>Follow all instructions given by invigilators</li>
+            </ul>
+          </div>
+        </div>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
+          </p>
+        </div>
+      </div>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Hall Ticket
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
+      </div>
+    `;
+  }
+  
+  function generateResultHtml(data) {
+    const { collegeInfo, studentData } = data;
+    let statusText = "NOT QUALIFIED", statusColor = "#dc3545";
+    if (studentData.result === "QUALIFIED") {
+      statusText = "QUALIFIED";
+      statusColor = "#28a745";
+    } else if (studentData.result === "WAITING LIST") {
+      statusText = "WAITING LIST";
+      statusColor = "#007bff";
+    }
+    
+    const isQualified = studentData.result === "QUALIFIED";
+    const isWaitingList = studentData.result === "WAITING LIST";
+    const isQualifiedOrWaiting = isQualified || isWaitingList;
+    
+    return `
+      <div class="document-container">
+        <div class="document-watermark">${statusText}</div>
+        <div class="document-header">
+          <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Entrance Exam Result</div>
+          </div>
+        </div>
+        <div class="document-content">
+          <div class="student-info-box">
+            <div class="info-grid">
+              ${['Student Name','Mobile Number','Date of Birth','Result Status'].map((label, i) => `
+                <div class="info-item">
+                  <span class="info-label">${label}:</span>
+                  <span class="info-value">${escapeHtml([studentData.name || studentData.studentName || 'N/A', studentData.mobile || studentData.phoneNumber || 'N/A', studentData.dob || 'N/A', statusText][i])}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="result-section-box" style="border-color: ${statusColor};">
+            <div class="result-status" style="color: ${statusColor};">${statusText}</div>
+            ${isQualifiedOrWaiting ? `<div class="result-rank">Rank: ${escapeHtml(studentData.rank || 'N/A')}</div>` : ''}
+            ${isQualified ? `
+              <div class="admission-info-box">
+                <div class="admission-title">Admission Details</div>
+                <div class="admission-row">
+                  <span class="admission-label">Admission Starts:</span>
+                  <span class="admission-value">Announce Later</span>
+                </div>
+                <div class="admission-row">
+                  <span class="admission-label">Class Starts:</span>
+                  <span class="admission-value">Announce Later</span>
+                </div>
+              </div>
+            ` : ''}
+            <div class="note-section" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
+              <div class="note-title">Important Note</div>
+              <div class="note-content">Selected candidates must complete admission formalities within the specified dates. Bring all original documents for verification. For any queries, contact college office.</div>
+            </div>
+          </div>
+        </div>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
+          </p>
+        </div>
+      </div>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Result
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
+      </div>
+    `;
+  }
+  
+  function displayDocument(htmlContent) {
+    document.getElementById('mainContentArea').style.display = 'none';
+    document.getElementById('documentDisplayArea').style.display = 'block';
+    document.getElementById('documentDisplayArea').innerHTML = htmlContent;
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  
+  async function handleApplicationSubmit(e) {
+    e.preventDefault();
+    const mobile = document.getElementById('appMobile').value.trim();
+    const dob = document.getElementById('appDob').value;
+    
+    try {
+      const response = await fetch(`${SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
+      const data = await response.json();
+      if (data.status === 'success') {
+        const html = generateApplicationHtml(data);
+        displayDocument(html);
+      } else {
+        alert('Application not found. Please check your details.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  }
+  
+  async function handleHallticketSubmit(e) {
+    e.preventDefault();
+    const mobile = document.getElementById('ticketMobile').value.trim();
+    const dob = document.getElementById('ticketDob').value;
+    
+    try {
+      const response = await fetch(`${SCRIPT_URL}?type=hallticket&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
+      const data = await response.json();
+      if (data.status === 'success') {
+        const html = generateHallticketHtml(data);
+        displayDocument(html);
+      } else {
+        alert('Hall ticket not found. Please check your details.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  }
+  
+  async function handleResultSubmit(e) {
+    e.preventDefault();
+    const mobile = document.getElementById('resultMobile').value.trim();
+    const dob = document.getElementById('resultDob').value;
+    
+    try {
+      const response = await fetch(`${SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
+      const data = await response.json();
+      if (data.status === 'success') {
+        const html = generateResultHtml(data);
+        displayDocument(html);
+      } else {
+        alert('Result not found. Please check your details.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  }
+  
+  async function handleNewApplicationSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    const photoFile = document.getElementById('photoInput').files[0];
+    
+    if (photoFile) {
+      try {
+        const photoData = await readFileAsBase64(photoFile);
+        data.photo = JSON.stringify({
+          name: photoFile.name,
+          mimeType: photoFile.type,
+          data: photoData.split(',')[1]
         });
+      } catch (error) {
+        alert('Error processing photo. Please try again.');
+        return;
+      }
+    }
+    
+    const submitData = new URLSearchParams();
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== undefined && value !== null) {
+        submitData.append(key, value);
+      }
+    }
+    
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: submitData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       });
-    })
-    .catch(error => console.error('Navbar load error:', error));
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Footer load error:', error));
+      
+      const result = await response.json();
+      if (result.status === 'success') {
+        form.reset();
+        document.getElementById('photoPreview').style.display = 'none';
+        toggleSubmitButton(false);
+        
+        setTimeout(() => {
+          const mockData = {
+            collegeInfo: {
+              logo: 'https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png',
+              contact: 'كلية الحافظ ممو ملا لتحفيظ القرآن',
+              collegeName: 'AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN',
+              underOrg: 'Under QUWATHUL ISLAM SANGAM',
+              affiliation: 'Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD',
+              address: 'Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District'
+            },
+            studentData: {
+              ...data,
+              submissionDate: new Date().toLocaleDateString(),
+              applicationId: result.data.applicationId || 'APP-' + Date.now(),
+              photoUrl: photoFile ? URL.createObjectURL(photoFile) : null
+            }
+          };
+          
+          const html = generateApplicationHtml(mockData);
+          displayDocument(html);
+        }, 1500);
+      } else {
+        alert('Submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('An error occurred during submission. Please try again.');
+    }
+  }
+  
+  function escapeHtml(text) {
+    if (!text) return '';
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return String(text).replace(/[&<>"']/g, function(m) {
+      return map[m];
+    });
+  }
+  
+  function adjustTickerSpeed() {
+    const tickerWrapper = document.querySelector('.ticker-wrapper');
+    if (!tickerWrapper) return;
+    if (window.innerWidth <= 768) {
+      tickerWrapper.style.animationDuration = '40s';
+    } else {
+      tickerWrapper.style.animationDuration = '50s';
+    }
+  }
+  
+  window.addEventListener('load', function() {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => {
+      document.body.style.opacity = '1';
+    }, 50);
+    adjustTickerSpeed();
+  });
+  
+  window.addEventListener('resize', adjustTickerSpeed);
 </script>
 </body>
 </html>
