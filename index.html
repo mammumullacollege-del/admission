@@ -1622,7 +1622,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoAAtiZo7LrDG7HDRCSuWADFLUtb1kidSfHczVrYDOG3ds8447EdmkTaQJhS75CX8lnw/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOvqaTZc2nltowJS4BPkdm-8gbxFuUK0JV3d0wA30-CL_JdfDz2ljT7Ieg_sIb49M76w/exec';
   
   document.addEventListener('DOMContentLoaded', function() {
     initializePage();
@@ -2150,76 +2150,101 @@
       alert('An error occurred. Please try again.');
     }
   }
-  
+  async function debugPublishDate() {
+  try {
+    const response = await fetch(`${SCRIPT_URL}?type=result_settings`);
+    const data = await response.json();
+    console.log("Publish date from server:", data.publishDate);
+    
+    if (data.publishDate) {
+      // Test the parsing
+      const regex = /^(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})\s*(AM|PM)$/i;
+      const match = data.publishDate.match(regex);
+      
+      if (match) {
+        console.log("Date parts:", {
+          year: match[1],
+          month: match[2],
+          day: match[3],
+          hour: match[4],
+          minute: match[5],
+          ampm: match[6]
+        });
+      }
+    }
+    
+    alert("Check console (F12) for debug info");
+  } catch (error) {
+    console.error("Debug error:", error);
+  }
+}
+
+// Call this from browser console: debugPublishDate()
   async function handleResultSubmit(e) {
   e.preventDefault();
   const mobile = document.getElementById('resultMobile').value.trim();
-  const dob    = document.getElementById('resultDob').value;
+  const dob = document.getElementById('resultDob').value;
 
   try {
-    console.log("Checking publication time...");
-
+    // Get settings from backend
     const settingsResponse = await fetch(`${SCRIPT_URL}?type=result_settings`);
     const settings = await settingsResponse.json();
 
-    if (settings.status !== 'success' || !settings.publishDate) {
-      console.log("No publish date set → showing result");
-      // proceed to fetch result
-    } else {
-      const raw = settings.publishDate.trim();
-      console.log("Raw publish date from sheet:", raw);
-
-      // ────────────────────────────────────────────────────────────────
-      // Very strict parser for your exact format: "2026-08-12 10:00 AM"
-      // ────────────────────────────────────────────────────────────────
-      const strictRegex = /^(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})\s*(AM|PM)$/i;
-      const match = raw.match(strictRegex);
-
-      let publishTime;
-
-      if (match) {
-        const [_, y, m, d, hh, mm, period] = match;
-        let hour = parseInt(hh, 10);
-        const minute = parseInt(mm, 10);
-
-        if (period.toUpperCase() === 'PM' && hour !== 12) hour += 12;
-        if (period.toUpperCase() === 'AM' && hour === 12) hour = 0;
-
-        publishTime = new Date(parseInt(y), parseInt(m)-1, parseInt(d), hour, minute, 0, 0);
-
-        if (isNaN(publishTime.getTime())) {
-          throw new Error("Parsed date is invalid");
+    if (settings.status === 'success' && settings.publishDate) {
+      const publishDateStr = settings.publishDate.trim();
+      
+      // Parse "2026-08-12 10:00 AM"
+      const regex = /(\d{4})-(\d{2})-(\d{2}) (\d{1,2}):(\d{2}) (AM|PM)/i;
+      const matches = publishDateStr.match(regex);
+      
+      if (matches) {
+        let year = parseInt(matches[1]);
+        let month = parseInt(matches[2]) - 1; // JS months are 0-based
+        let day = parseInt(matches[3]);
+        let hour = parseInt(matches[4]);
+        let minute = parseInt(matches[5]);
+        let ampm = matches[6].toUpperCase();
+        
+        // Convert to 24-hour format
+        if (ampm === 'PM' && hour < 12) hour += 12;
+        if (ampm === 'AM' && hour === 12) hour = 0;
+        
+        // Create date in IST (by using the browser's timezone but we'll compare timestamps)
+        // This assumes the date in sheet is in IST
+        const publishDate = new Date(year, month, day, hour, minute, 0);
+        
+        // Get current time
+        const now = new Date();
+        
+        // Get the timezone offset difference between local and IST
+        // IST is UTC+5:30, so offset is -330 minutes from UTC
+        const istOffset = -330; // minutes from UTC
+        
+        // Get local timezone offset
+        const localOffset = now.getTimezoneOffset();
+        
+        // Calculate the difference
+        const offsetDiff = istOffset - localOffset;
+        
+        // Adjust the current time to IST for fair comparison
+        const nowInIST = new Date(now.getTime() + (offsetDiff * 60 * 1000));
+        
+        // Compare
+        if (nowInIST < publishDate) {
+          const options = { 
+            timeZone: 'Asia/Kolkata', 
+            dateStyle: 'full', 
+            timeStyle: 'short' 
+          };
+          const formattedDate = publishDate.toLocaleString('en-IN', options);
+          
+          alert(`⏰ Results Not Published Yet\n\nResults will be available after:\n${formattedDate} (IST)`);
+          return;
         }
-      } else {
-        console.warn("Date format did NOT match expected pattern → BLOCK by default");
-        alert("Result publication date format is invalid in the system.\nPlease contact college office.");
-        return;   // ← BLOCK access if format is wrong
       }
-
-      const now = new Date();
-
-      console.log("Now:", now.toISOString());
-      console.log("Publish:", publishTime.toISOString());
-
-      if (now < publishTime) {
-        const displayDate = publishTime.toLocaleString('en-IN', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true
-        });
-
-        alert(`Results are not yet published.\n\nAvailable after:\n${displayDate}`);
-        return;
-      }
-
-      console.log("Current time is AFTER publication → showing result");
     }
 
-    // ── If we reached here → either no date or time has passed ──
+    // Fetch and display result
     const response = await fetch(`${SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
     const data = await response.json();
 
@@ -2231,10 +2256,39 @@
     }
 
   } catch (err) {
-    console.error("Result check error:", err);
-    alert("Error checking result. Please try again or contact support.");
+    console.error("Error:", err);
+    alert("Error checking result. Please try again.");
   }
 }
+
+  async function testPublishDate() {
+  try {
+    const response = await fetch(`${SCRIPT_URL}?type=result_settings`);
+    const data = await response.json();
+    console.log("=== PUBLISH DATE DEBUG ===");
+    console.log("Full response:", data);
+    
+    if (data.publishDate) {
+      console.log("Publish date string:", data.publishDate);
+      console.log("Type:", typeof data.publishDate);
+      console.log("Length:", data.publishDate.length);
+      
+      // Test parsing
+      const testDate = new Date(data.publishDate);
+      console.log("Parsed as Date:", testDate.toString());
+      console.log("Timestamp:", testDate.getTime());
+      
+      alert(`Publish date from sheet: ${data.publishDate}\n\nCheck console for more details (F12)`);
+    } else {
+      alert("No publish date found in column F");
+    }
+  } catch (error) {
+    console.error("Debug error:", error);
+    alert("Error: " + error.message);
+  }
+}
+
+// Run this in browser console: testPublishDate()
   // Add this function to debug where the date is in your Result sheet
 async function debugResultSettings() {
   try {
