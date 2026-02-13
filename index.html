@@ -2157,7 +2157,6 @@
     console.log("Publish date from server:", data.publishDate);
     
     if (data.publishDate) {
-      // Test the parsing
       const regex = /^(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})\s*(AM|PM)$/i;
       const match = data.publishDate.match(regex);
       
@@ -2179,57 +2178,38 @@
   }
 }
 
-// Call this from browser console: debugPublishDate()
   async function handleResultSubmit(e) {
   e.preventDefault();
   const mobile = document.getElementById('resultMobile').value.trim();
   const dob = document.getElementById('resultDob').value;
 
   try {
-    // Get settings from backend
     const settingsResponse = await fetch(`${SCRIPT_URL}?type=result_settings`);
     const settings = await settingsResponse.json();
 
     if (settings.status === 'success' && settings.publishDate) {
       const publishDateStr = settings.publishDate.trim();
       
-      // Parse "2026-08-12 10:00 AM"
       const regex = /(\d{4})-(\d{2})-(\d{2}) (\d{1,2}):(\d{2}) (AM|PM)/i;
       const matches = publishDateStr.match(regex);
       
       if (matches) {
         let year = parseInt(matches[1]);
-        let month = parseInt(matches[2]) - 1; // JS months are 0-based
+        let month = parseInt(matches[2]) - 1; 
         let day = parseInt(matches[3]);
         let hour = parseInt(matches[4]);
         let minute = parseInt(matches[5]);
         let ampm = matches[6].toUpperCase();
         
-        // Convert to 24-hour format
         if (ampm === 'PM' && hour < 12) hour += 12;
         if (ampm === 'AM' && hour === 12) hour = 0;
         
-        // Create date in IST (by using the browser's timezone but we'll compare timestamps)
-        // This assumes the date in sheet is in IST
         const publishDate = new Date(year, month, day, hour, minute, 0);
-        
-        // Get current time
         const now = new Date();
-        
-        // Get the timezone offset difference between local and IST
-        // IST is UTC+5:30, so offset is -330 minutes from UTC
-        const istOffset = -330; // minutes from UTC
-        
-        // Get local timezone offset
+        const istOffset = -330; 
         const localOffset = now.getTimezoneOffset();
-        
-        // Calculate the difference
         const offsetDiff = istOffset - localOffset;
-        
-        // Adjust the current time to IST for fair comparison
         const nowInIST = new Date(now.getTime() + (offsetDiff * 60 * 1000));
-        
-        // Compare
         if (nowInIST < publishDate) {
           const options = { 
             timeZone: 'Asia/Kolkata', 
@@ -2244,7 +2224,6 @@
       }
     }
 
-    // Fetch and display result
     const response = await fetch(`${SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
     const data = await response.json();
 
@@ -2273,7 +2252,6 @@
       console.log("Type:", typeof data.publishDate);
       console.log("Length:", data.publishDate.length);
       
-      // Test parsing
       const testDate = new Date(data.publishDate);
       console.log("Parsed as Date:", testDate.toString());
       console.log("Timestamp:", testDate.getTime());
@@ -2288,8 +2266,6 @@
   }
 }
 
-// Run this in browser console: testPublishDate()
-  // Add this function to debug where the date is in your Result sheet
 async function debugResultSettings() {
   try {
     const response = await fetch(`${SCRIPT_URL}?type=result_settings`);
@@ -2301,8 +2277,6 @@ async function debugResultSettings() {
   }
 }
 
-// Call this from browser console: debugResultSettings()
-  
   async function handleNewApplicationSubmit(e) {
     e.preventDefault();
     const form = e.target;
