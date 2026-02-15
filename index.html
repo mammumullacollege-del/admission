@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
   <title>AMCT | Admission</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -28,6 +28,8 @@
       scroll-behavior: smooth;
       overflow-x: hidden;
       padding-top: 0px;
+      margin: 0;
+      width: 100%;
     }
     
     a {
@@ -65,18 +67,18 @@
     
     .ticker-container {
       background: linear-gradient(90deg, var(--dark-green), var(--islamic-green));
-  color: white;
-  overflow: hidden;
-  position: fixed;
-  top: 0; 
-  left: 0;
-  right: 0;
-  border-bottom: 2px solid var(--islamic-gold);
-  height: 50px;
-  display: flex;
-  align-items: center;
-  z-index: 1030;
-  margin: 0;
+      color: white;
+      overflow: hidden;
+      position: fixed;
+      top: 0; 
+      left: 0;
+      right: 0;
+      border-bottom: 2px solid var(--islamic-gold);
+      height: 50px;
+      display: flex;
+      align-items: center;
+      z-index: 1030;
+      margin: 0;
     }
     
     .ticker-wrapper {
@@ -123,19 +125,20 @@
     }
     
     .page-header {
-  background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
-  color: white;
-  height: 30vh;
-  min-height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 50px; 
-  border-bottom: 5px solid var(--islamic-gold);
-  position: relative;
-  overflow: hidden;
-}
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      color: white;
+      height: 30vh;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 50px; 
+      border-bottom: 5px solid var(--islamic-gold);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
     
     .page-header::before {
       content: '';
@@ -150,6 +153,8 @@
     .page-header-content {
       position: relative;
       z-index: 2;
+      width: 100%;
+      padding: 0 15px;
     }
     
     .page-title {
@@ -172,6 +177,40 @@
     .content-section {
       padding: 4rem 0;
       background: var(--islamic-cream);
+      width: 100%;
+    }
+    
+    .container {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 100%;
+    }
+    
+    @media (min-width: 576px) {
+      .container {
+        max-width: 540px;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .container {
+        max-width: 720px;
+      }
+    }
+    
+    @media (min-width: 992px) {
+      .container {
+        max-width: 960px;
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1140px;
+      }
     }
     
     .section-header {
@@ -220,6 +259,8 @@
       box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3);
       transition: var(--transition);
       padding: 0.75rem 1.5rem;
+      width: 100%;
+      max-width: 100%;
     }
     
     .btn-gold:hover {
@@ -237,6 +278,8 @@
       padding: 0.75rem 1.5rem;
       font-weight: 600;
       transition: var(--transition);
+      width: 100%;
+      max-width: 100%;
     }
     
     .btn-outline-gold:hover {
@@ -298,10 +341,17 @@
     .form-container {
       background: white;
       border-radius: 15px;
-      padding: 2.5rem;
+      padding: 2rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       border: 2px solid var(--islamic-gold);
       margin-bottom: 2rem;
+      width: 100%;
+    }
+    
+    @media (max-width: 576px) {
+      .form-container {
+        padding: 1.25rem;
+      }
     }
     
     .form-title {
@@ -312,6 +362,12 @@
       border-bottom: 2px solid var(--islamic-gold);
       font-size: 1.8rem;
       text-align: center;
+    }
+    
+    @media (max-width: 576px) {
+      .form-title {
+        font-size: 1.5rem;
+      }
     }
     
     .form-label {
@@ -334,6 +390,7 @@
       padding: 0.75rem 1rem;
       transition: var(--transition);
       font-size: 1rem;
+      width: 100%;
     }
     
     .form-control:focus {
@@ -348,6 +405,12 @@
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       border-left: 4px solid var(--islamic-gold);
+    }
+    
+    @media (max-width: 576px) {
+      .form-step {
+        padding: 1rem;
+      }
     }
     
     .form-step-title {
@@ -374,6 +437,12 @@
       background: rgba(248, 243, 230, 0.3);
     }
     
+    @media (max-width: 576px) {
+      .file-upload-container {
+        padding: 1.25rem;
+      }
+    }
+    
     .file-upload-container:hover {
       background: rgba(248, 243, 230, 0.5);
       border-color: var(--dark-green);
@@ -388,12 +457,25 @@
       display: none;
     }
     
+    @media (max-width: 576px) {
+      .file-preview {
+        max-width: 150px;
+        max-height: 150px;
+      }
+    }
+    
     .instructions-box {
       background: linear-gradient(135deg, rgba(10, 92, 54, 0.05), rgba(193, 154, 63, 0.05));
       border-radius: 15px;
       padding: 1.5rem;
       border: 2px solid var(--islamic-gold);
       margin: 2rem 0;
+    }
+    
+    @media (max-width: 576px) {
+      .instructions-box {
+        padding: 1rem;
+      }
     }
     
     .instructions-title {
@@ -523,9 +605,11 @@
       margin-bottom: 0.75rem;
     }
     
+    /* Mobile-optimized document styles */
     .document-container {
-      width: 21cm;
-      min-height: 29.7cm;
+      width: 100%;
+      max-width: 210mm;
+      min-height: auto;
       background: white;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       border-radius: 12px;
@@ -539,7 +623,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(-45deg);
-      font-size: 60px;
+      font-size: 4vw;
       color: rgba(10, 92, 54, 0.03);
       font-weight: bold;
       z-index: 0;
@@ -547,22 +631,29 @@
       pointer-events: none;
     }
     
+    @media (max-width: 768px) {
+      .document-watermark {
+        font-size: 8vw;
+      }
+    }
+    
     .document-header {
       background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
       color: white;
-      padding: 20px;
+      padding: 15px;
       text-align: left;
       position: relative;
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
-      gap: 20px;
+      gap: 15px;
       border-bottom: 5px solid var(--islamic-gold);
+      flex-wrap: wrap;
     }
     
     .document-logo {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       border: 3px solid white;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -571,24 +662,32 @@
       flex-shrink: 0;
     }
     
+    @media (max-width: 768px) {
+      .document-logo {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    
     .document-college-info {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       text-align: left;
+      min-width: 200px;
     }
     
     .document-arabic {
       font-family: 'Scheherazade New', serif;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       margin-bottom: 2px;
       text-align: left;
     }
     
     .document-college-name {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 700;
       margin-bottom: 2px;
       text-align: left;
@@ -596,47 +695,53 @@
     }
     
     .document-address {
-      font-size: 10px;
+      font-size: 9px;
       margin-bottom: 2px;
       text-align: left;
       color: rgba(255, 255, 255, 0.9);
     }
     
     .document-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      margin-top: 8px;
+      margin-top: 5px;
       text-align: left;
       color: white;
       border-top: 1px solid rgba(255, 255, 255, 0.3);
-      padding-top: 8px;
+      padding-top: 5px;
     }
     
     .document-content {
-      padding: 25px;
+      padding: 15px;
       position: relative;
       text-align: left;
       z-index: 1;
     }
     
+    @media (max-width: 768px) {
+      .document-content {
+        padding: 10px;
+      }
+    }
+    
     .document-footer {
       text-align: center;
-      padding: 10px;
+      padding: 8px;
       background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
       border-top: 1px solid #dee2e6;
-      margin-top: 20px;
+      margin-top: 15px;
     }
     
-    .info-grid {
+    .info-grid, .info-grid1 {
       display: grid;
-      grid-template-columns: 235px 235px 235px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 8px;
     }
     
-    .info-grid1 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+    @media (max-width: 768px) {
+      .info-grid, .info-grid1 {
+        grid-template-columns: 1fr;
+      }
     }
     
     .info-item {
@@ -644,6 +749,7 @@
       padding: 5px 0;
       border-bottom: 1px dashed #dee2e6;
       text-align: left;
+      flex-wrap: wrap;
     }
     
     .info-label {
@@ -655,19 +761,27 @@
       text-align: left;
     }
     
+    @media (max-width: 768px) {
+      .info-label {
+        width: 100%;
+        margin-bottom: 2px;
+      }
+    }
+    
     .info-value {
       color: #212529;
       font-size: 11px;
       flex: 1;
       line-height: 1.2;
       text-align: left;
+      word-break: break-word;
     }
     
     .document-section-title {
       font-size: 14px;
       font-weight: 600;
       color: var(--islamic-green);
-      margin: 8px 0 3px;
+      margin: 10px 0 5px;
       padding-bottom: 3px;
       border-bottom: 1px solid #e9ecef;
       text-align: left;
@@ -676,30 +790,45 @@
     .document-declaration {
       background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
       border-radius: 8px;
-      padding: 15px;
-      margin-top: 20px;
+      padding: 12px;
+      margin-top: 15px;
       border: 1px solid #dee2e6;
     }
     
     .document-signature-section {
       text-align: right;
-      margin-top: 20px;
-      padding-top: 10px;
+      margin-top: 15px;
+      padding-top: 8px;
       border-top: 1px solid #ced4da;
+    }
+    
+    @media (max-width: 768px) {
+      .document-signature-section {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
     }
     
     .document-signature-line {
       display: inline-block;
-      width: 250px;
+      width: 200px;
       border-bottom: 1px solid #212529;
       margin-bottom: 3px;
+    }
+    
+    @media (max-width: 768px) {
+      .document-signature-line {
+        width: 100%;
+      }
     }
     
     .student-info-box {
       background: #f8f9fa;
       border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
+      padding: 12px;
+      margin-bottom: 12px;
       border: 1px solid #dee2e6;
     }
     
@@ -707,9 +836,9 @@
       background: white;
       border: 2px solid var(--islamic-green);
       border-radius: 8px;
-      padding: 15px;
-      margin: 15px 0;
-      max-width: 600px;
+      padding: 12px;
+      margin: 12px 0;
+      max-width: 100%;
       display: flex;
       flex-direction: column;
     }
@@ -719,18 +848,24 @@
       font-weight: 700;
       color: var(--islamic-green);
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     
     .exam-info-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 8px;
       flex: 1;
     }
     
+    @media (max-width: 480px) {
+      .exam-info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
     .exam-item {
-      padding: 8px;
+      padding: 6px;
       background: #f8f9fa;
       border-radius: 6px;
       border: 1px solid #dee2e6;
@@ -743,26 +878,32 @@
       font-weight: 600;
       color: #495057;
       font-size: 10px;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
     
     .exam-value {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--islamic-green);
     }
     
     .exam-wrapper {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr;
       gap: 15px;
       align-items: start;
+    }
+    
+    @media (min-width: 768px) {
+      .exam-wrapper {
+        grid-template-columns: 1fr auto;
+      }
     }
     
     .signing-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 15px 0;
+      margin: 12px 0;
       border: 2px solid var(--islamic-green);
       border-radius: 6px;
       overflow: hidden;
@@ -771,45 +912,57 @@
     .signing-table th {
       background: var(--islamic-green);
       color: white;
-      padding: 8px;
+      padding: 6px;
       font-weight: 600;
-      font-size: 12px;
+      font-size: 11px;
       text-align: center;
     }
     
     .signing-table td {
-      padding: 15px;
+      padding: 10px;
       text-align: center;
       border: 1px solid #dee2e6;
       font-weight: 500;
       color: #495057;
-      height: 60px;
-      font-size: 11px;
+      height: 50px;
+      font-size: 10px;
+    }
+    
+    @media (max-width: 480px) {
+      .signing-table th {
+        font-size: 9px;
+        padding: 4px;
+      }
+      
+      .signing-table td {
+        padding: 6px;
+        font-size: 9px;
+      }
     }
     
     .document-instructions {
       background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
       border-radius: 8px;
-      padding: 15px;
-      margin-top: 15px;
+      padding: 12px;
+      margin-top: 12px;
       border: 1px solid #ffc107;
     }
     
     .document-instructions-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 700;
       color: #856404;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-align: center;
     }
     
     .document-instructions-list {
       padding-left: 20px;
-      font-size: 11px;
+      font-size: 10px;
     }
     
     .document-instructions-list li {
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       color: #856404;
     }
     
@@ -817,101 +970,135 @@
       background: white;
       border: 2px solid var(--islamic-green);
       border-radius: 8px;
-      padding: 15px;
-      margin: 15px 0;
+      padding: 12px;
+      margin: 12px 0;
       text-align: center;
     }
     
     .result-status {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--islamic-green);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+    }
+    
+    @media (max-width: 480px) {
+      .result-status {
+        font-size: 18px;
+      }
     }
     
     .result-rank {
-      font-size: 16px;
+      font-size: 14px;
       color: #6c757d;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     
     .admission-info-box {
       background: #e8f4ff;
       border-radius: 6px;
-      padding: 12px;
-      margin-top: 15px;
+      padding: 10px;
+      margin-top: 12px;
       text-align: left;
     }
     
     .admission-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--islamic-green);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-align: center;
     }
     
     .admission-row {
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
+    }
+    
+    @media (min-width: 768px) {
+      .admission-row {
+        flex-direction: row;
+        align-items: flex-start;
+      }
     }
     
     .admission-label {
       font-weight: 600;
       color: #495057;
-      min-width: 140px;
-      font-size: 11px;
+      min-width: 120px;
+      font-size: 10px;
       padding: 2px 0;
     }
     
     .admission-value {
       color: #212529;
-      font-size: 11px;
+      font-size: 10px;
       flex: 1;
       padding: 2px 0;
+      word-break: break-word;
     }
     
     .note-section {
       background: #fff3cd;
       border-radius: 6px;
-      padding: 12px;
-      margin-top: 12px;
+      padding: 10px;
+      margin-top: 10px;
       border-left: 4px solid #ffc107;
     }
     
     .note-title {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: #856404;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     
     .note-content {
-      font-size: 11px;
+      font-size: 10px;
       color: #856404;
       line-height: 1.4;
     }
     
+    .no-print {
+      padding: 15px;
+      text-align: center;
+    }
+    
+    .no-print .btn-gold,
+    .no-print .btn-outline-gold {
+      width: auto;
+      min-width: 150px;
+      margin: 5px;
+    }
+    
+    @media (max-width: 480px) {
+      .no-print .btn-gold,
+      .no-print .btn-outline-gold {
+        width: 100%;
+        margin: 5px 0;
+      }
+    }
+    
     @media print {
-    body * { visibility: hidden; }
-    .document-container, .document-container * { visibility: visible; }
-    .document-container {
+      body * { visibility: hidden; }
+      .document-container, .document-container * { visibility: visible; }
+      .document-container {
         position: absolute;
         top: 0;
         left: 0;
-        width: 210mm !important;
+        width: 100% !important;
         height: auto !important;
         min-height: 297mm !important;
         margin: 0 !important;
         box-shadow: none !important;
         border-radius: 0 !important;
+      }
+      .document-watermark,
+      .no-print { display: none !important; }
+      @page { size: A4; margin: 4mm; }
+      body { margin: 0; padding: 0; background: white; }
     }
-    .document-watermark,
-    .no-print { display: none !important; }
-    @page { size: A4; margin: 4mm; }
-    body { margin: 0; padding: 0; background: white; }
-}
     
     .footer {
       background: linear-gradient(135deg, var(--dark-green), var(--islamic-green));
@@ -1042,8 +1229,8 @@
       
       .page-header {
         margin-top: 40px;
-    height: 26vh;
-    min-height: 180px;
+        height: 26vh;
+        min-height: 180px;
       }
       
       .page-title {
@@ -1062,18 +1249,8 @@
         font-size: 1.8rem;
       }
       
-      .form-container {
-        padding: 1.5rem;
-      }
-      
       .portal-card {
         padding: 1.5rem;
-      }
-      
-      .document-container {
-        width: 100%;
-        box-shadow: none;
-        border-radius: 0;
       }
       
       .timeline::before {
@@ -1107,7 +1284,7 @@
       .timeline-content-box:hover::before {
         transform: translateY(-50%) scale(1.2);
       }
-
+      
       .ticker-container {
         height: 40px;
       }
@@ -1119,6 +1296,23 @@
       .ticker-item {
         padding: 0 15px;
         font-size: 0.85rem;
+      }
+      
+      /* Mobile photo positioning */
+      .document-content .photo-position {
+        position: static !important;
+        margin: 0 auto 15px auto;
+        text-align: center;
+      }
+      
+      [style*="position:absolute"] {
+        position: static !important;
+        margin: 10px auto !important;
+        text-align: center !important;
+      }
+      
+      .document-content [style*="margin-right:"] {
+        margin-right: 0 !important;
       }
     }
     
@@ -1135,6 +1329,16 @@
         width: 60px;
         height: 60px;
         font-size: 1.5rem;
+      }
+      
+      .row {
+        margin-left: -8px;
+        margin-right: -8px;
+      }
+      
+      .col-md-6, .col-lg-3 {
+        padding-left: 8px;
+        padding-right: 8px;
       }
     }
   </style>
