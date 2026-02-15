@@ -1998,22 +1998,34 @@
       </div>
     `;
   }
-  
+
   function generateResultHtml(data) {
     const { collegeInfo, studentData } = data;
-    let statusText = "NOT QUALIFIED", statusColor = "#dc3545";
+    let statusText = "NOT QUALIFIED";
+    let statusColor = "#dc3545";
+    let malayalamNote = "";
+
     if (studentData.result === "QUALIFIED") {
       statusText = "QUALIFIED";
       statusColor = "#28a745";
-    } else if (studentData.result === "WAITING LIST") {
+      malayalamNote = `പ്രിയ വിദ്യാർത്ഥി, താങ്കൾ പ്രവേശന പരീക്ഷയിൽ വിജയിച്ചു. അഭിനന്ദനങ്ങള്‍... 
+      നിശ്ചിത തീയതിക്കുള്ളിൽ പ്രവേശന നടപടികൾ പൂർത്തീകരിക്കണം. ആധാർ, ജനന സർട്ടിഫിക്കറ്റ്, റേഷന്‍ കാർഡ് എന്നിവയുടെ രണ്ട് വീതം കോപ്പികള്‍ കൊണ്ടുവരിക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`; 
+    } 
+    else if (studentData.result === "WAITING LIST") {
       statusText = "WAITING LIST";
       statusColor = "#007bff";
+      malayalamNote = `മെച്ചപ്പെട്ട രീതിയില്‍ കൂടുതല്‍ മുന്നൊരുക്കം നടത്തി രണ്ടാം ഘട്ട പ്രവേശന പരീക്ഷയില്‍ യോഗ്യത നേടുക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`; 
+    } 
+    else {
+      statusText = "NOT QUALIFIED";
+      statusColor = "#dc3545";
+      malayalamNote = `ഈ വർഷം യോഗ്യത ലഭിച്ചില്ല, കോളേജ് മാനദണ്ഡ പ്രായപരിധി പ്രകാരം അടുത്ത വർഷവും അപേക്ഷിക്കാന്‍ സാധിക്കുമെങ്കില്‍ അടുത്ത വർഷം വീണ്ടും ശ്രമിക്കുക. അല്ലെങ്കിൽ മറ്റ് കോളേജുകളിൽ പ്രവേശനം തേടുക.`; 
     }
-    
+
     const isQualified = studentData.result === "QUALIFIED";
     const isWaitingList = studentData.result === "WAITING LIST";
     const isQualifiedOrWaiting = isQualified || isWaitingList;
-    
+
     return `
       <div class="document-container">
         <div class="document-watermark">${statusText}</div>
@@ -2047,17 +2059,17 @@
                 <div class="admission-title">Admission Details</div>
                 <div class="admission-row">
                   <span class="admission-label">Admission Starts:</span>
-                  <span class="admission-value">Announce Later</span>
+                  <span class="admission-value">പിന്നീട് അറിയിക്കും</span>
                 </div>
                 <div class="admission-row">
                   <span class="admission-label">Class Starts:</span>
-                  <span class="admission-value">Announce Later</span>
+                  <span class="admission-value">പിന്നീട് അറിയിക്കും</span>
                 </div>
               </div>
             ` : ''}
-            <div class="note-section" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
-              <div class="note-title">Important Note</div>
-              <div class="note-content">Selected candidates must complete admission formalities within the specified dates. Bring all original documents for verification. For any queries, contact college office.</div>
+            <div class="note-section malayalam-msg" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
+              <div class="note-title">📌 Important Note</div>
+              <div class="note-content" style="white-space: pre-line;">${escapeHtml(malayalamNote)}</div>
             </div>
           </div>
         </div>
