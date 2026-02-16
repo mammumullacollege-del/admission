@@ -998,27 +998,52 @@
   
   function calculateAge(dobString) {
   if (!dobString) return;
-  
+
   const parts = dobString.split('-');
   const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-  
+  const birthDate = new Date(dobString);
+  const referenceDate = new Date('2026-02-15');     // Exam date
+
+  let years = referenceDate.getFullYear() - birthDate.getFullYear();
+  let months = referenceDate.getMonth() - birthDate.getMonth();
+  let days   = referenceDate.getDate()   - birthDate.getDate();
+
+  if (days < 0) {
+    months--;
+    days += new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 0).getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  document.getElementById('ageDisplay').textContent = 
+    `Date of Birth: ${formattedDate} | Age as on 15 Feb 2026: ${years} years ${months} months ${days} days`;
+}function calculateAge(dobString) {
+  if (!dobString) return;
+
+  const parts = dobString.split('-');
+  const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+
   const birthDate = new Date(dobString);
   const today = new Date();
   let years = today.getFullYear() - birthDate.getFullYear();
   let months = today.getMonth() - birthDate.getMonth();
   let days = today.getDate() - birthDate.getDate();
-  
+
   if (days < 0) {
     months--;
     days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
   }
-  
+
   if (months < 0) {
     years--;
     months += 12;
   }
-  
-  document.getElementById('ageDisplay').textContent = `Date of Birth: ${formattedDate} | Age: ${years} years ${months} months ${days} days`;
+
+  document.getElementById('ageDisplay').textContent = 
+    `Date of Birth: ${formattedDate} | Age: ${years} years ${months} months ${days} days`;
 }
   
   function togglePreviousStudy(show) {
