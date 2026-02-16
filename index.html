@@ -1429,10 +1429,10 @@
       <div class="document-content">
         <div class="student-info-box">
           <div class="info-grid">
-            ${['Student Name','Mobile Number','Date of Birth','Result Status'].map((label, i) => `
+            ${['Student Name','Mobile Number','Date of Birth'].map((label, i) => `
               <div class="info-item">
                 <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([studentData.name || studentData.studentName || 'N/A', studentData.mobile || studentData.phoneNumber || 'N/A', formattedDob, statusText][i])}</span>
+                <span class="info-value">${escapeHtml([studentData.name || studentData.studentName || 'N/A', studentData.mobile || studentData.phoneNumber || 'N/A', formattedDob][i])}</span>
               </div>
             `).join('')}
           </div>
