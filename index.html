@@ -459,6 +459,7 @@
 <div class="islamic-ornament ornament-2">✸</div>
 <div class="islamic-ornament ornament-3">✸</div>
 
+<!-- Loading Overlay -->
 <div id="loadingOverlay" class="loading-overlay">
   <div class="loading-content">
     <div class="logo-animation-container">
@@ -487,6 +488,63 @@
     <div class="college-name-loading">Al Hafiz Mammu Mulla College of Thahfeezul Quran</div>
   </div>
 </div>
+
+<!-- Date Configuration - Edit these values only -->
+<script>
+  // ===== CENTRALIZED DATE CONFIGURATION =====
+  // Edit only these values for all dates across the application
+  const CONFIG = {
+    // Exam Date
+    EXAM_DATE_ISO: '2026-02-15',           // YYYY-MM-DD format
+    EXAM_DATE_DDMMYYYY: '15-02-2026',       // DD-MM-YYYY format
+    EXAM_DAY_MALAYALAM: 'ഞായർ',
+    EXAM_TIME: '07:30 AM',
+    EXAM_REPORTING_TIME: '07:30 AM',
+    EXAM_DURATION: '08:00 AM - 12:30 PM',
+    EXAM_VENUE: 'HIM Puthanpalli',
+    
+    // Application Deadline
+    APPLICATION_DEADLINE_DDMMYYYY: '12-02-2026',
+    
+    // Result Date
+    RESULT_PUBLISH_DATE_ISO: '2026-02-17',  // YYYY-MM-DD format
+    RESULT_PUBLISH_DATE_DDMMYYYY: '17-02-2026',
+    RESULT_PUBLISH_DAY_MALAYALAM: 'ചൊവ്വ',
+    RESULT_PUBLISH_TIME: 'വൈകുന്നേരം 4 മണി',
+    
+    // Admission Dates
+    ADMISSION_STARTS: 'പിന്നീട് അറിയിക്കും',
+    CLASS_STARTS: 'പിന്നീട് അറിയിക്കും',
+    
+    // College Contact
+    COLLEGE_PHONE: '9048020243',
+    COLLEGE_EMAIL: 'mammumullacollege@gmail.com',
+    
+    // Google Apps Script URL
+    SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxO7KLtUlx_SciMT8UXBaluAbljZghqyiD4PY8XZrgg4mmy06wBj2MX0ixnO7R-zkBh0A/exec'
+  };
+  
+  // Helper function to format date from ISO to DD-MM-YYYY
+  function formatDateToDDMMYYYY(isoDate) {
+    if (!isoDate) return 'N/A';
+    if (isoDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const parts = isoDate.split('-');
+      return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+    return isoDate;
+  }
+  
+  // Helper function to format date for display in forms
+  function formatDateForDisplay(dateString) {
+    if (!dateString) return 'N/A';
+    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      return formatDateToDDMMYYYY(dateString);
+    }
+    return dateString;
+  }
+</script>
+
+<!-- Ticker Container -->
 <div class="ticker-container">
   <div class="ticker-wrapper">
     <div class="ticker-item">
@@ -503,11 +561,11 @@
     </div>
     <div class="ticker-item">
       <span class="ticker-badge">✨ UPDATED</span>
-      <strong>15-02-2026 ഞായർ ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, 12-02-2026 വ്യാഴാഴ്ചക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</strong>
-    </div>    
+      <strong id="tickerExamDate">15-02-2026 ഞായർ ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, 12-02-2026 ന് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</strong>
+    </div>
     <div class="ticker-item">
       <span class="ticker-badge">✨ UPDATED</span>
-      <strong>17-02-2026 ചൊവ്വ വെെകുന്നേരം 4 മണിക്ക് ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ റിസള്‍ട്ട് പബ്ലിഷ് ചെയ്യും</strong>
+      <strong id="tickerResultDate">17-02-2026 ചൊവ്വ വൈകുന്നേരം 4 മണി ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ റിസള്‍ട്ട് പബ്ലിഷ് ചെയ്യും</strong>
     </div>
     <div class="ticker-item">
       <span class="ticker-badge">⚠ IMPORTANT</span>
@@ -520,6 +578,7 @@
   </div>
 </div>
 
+<!-- Page Header -->
 <div class="page-header">
   <div class="container">
     <div class="page-header-content">
@@ -529,88 +588,33 @@
   </div>
 </div>
 
-<!--<div class="instructions-box m-5" data-aos="fade-up">
-  <h3 class="instructions-title"><i class="fas fa-info-circle"></i>പ്രധാന നിർദ്ദേശങ്ങൾ</h3>
-  <ul class="instructions-list">
-    <li>അപ്ലിക്കേഷന്‍, ഹാള്‍‍ടക്കറ്റ്, റിസള്‍ട്ട് എന്നിവക്ക്<strong> അപേക്ഷയില്‍ നല്കിയ മൊബൈൽ നമ്പറും ജനന തീയതിയും</strong> നിർബന്ധമായും നൽകേണ്ടതാണ്.</li>
-    <li>മൊബൈൽ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം</li>
-    <li>അപേക്ഷ സമർപ്പിക്കുമ്പോൾ, * ചിഹ്നമുള്ള എല്ലാ ഫീൽഡുകളും നിർബന്ധമായും പൂരിപ്പിക്കേണ്ടതാണ്</li>
-    <li>12-02-2026 വ്യാഴാഴ്ചക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</li>
-    <li>പ്രവേശന പരീക്ഷ തീയതി: <strong>15/02/2026 ഞായർ രാവിലെ 07.30</strong></li>
-    <li>പ്രവേശന പരീക്ഷാദിനത്തില്‍ ആധാര്‍ കോപ്പി, അപേക്ഷാ ഫീ 300 രൂപ എന്നിവ സ്ഥാപനത്തില്‍ സമർപ്പിക്കുക.</li>
-    <li>സംശയങ്ങൾക്ക് ബന്ധപ്പെടുക: +91 9048020243</li>
-  </ul>
-</div>-->
-
+<!-- Main Content Area -->
 <div id="mainContentArea">
-  <!--<section class="content-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Admission Timeline</h2>
-      </div>
-      <div class="timeline">
-        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-lg-center">
-          <div class="timeline-item" data-aos="fade-up">
-            <div class="timeline-content-box">
-              <div class="timeline-date">15 February 2026, 10:00 AM</div>
-              <h3 class="timeline-title"><i class="fas fa-file-signature"></i>Entrance Examination</h3>
-            </div>
-          </div>
-          <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-            <div class="timeline-content-box">
-              <div class="timeline-date">17 February 2026</div>
-              <h3 class="timeline-title"><i class="fas fa-chart-line"></i>Result Announcement</h3>
-            </div>
-          </div>
-          <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-            <div class="timeline-content-box">
-              <div class="timeline-date">Announce Later</div>
-              <h3 class="timeline-title"><i class="fas fa-user-graduate"></i>Admission Starts</h3>
-            </div>
-          </div>
-          <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-            <div class="timeline-content-box">
-              <div class="timeline-date">Announce Later</div>
-              <h3 class="timeline-title"><i class="fas fa-book-open"></i>Classes Commence</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>-->
-
+  <!-- Dashboard Cards -->
   <section class="content-section" style="background: white;">
     <div class="container">
       <div class="row g-4">
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-file-alt"></i></div>
-            <!--<h3 class="portal-title">New Application</h3>
-            <p class="portal-description">Submit new application</p><br><br><br>-->
             <button class="btn-gold w-100" onclick="showForm('applyNowForm')"><i class="fas fa-pen me-2"></i>Apply Now</button>
           </div>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-file-download"></i></div>
-            <!--<h3 class="portal-title">Download Application</h3>
-            <p class="portal-description">Download your submitted application form</p>-->
             <button class="btn-gold w-100" onclick="showForm('applicationForm')"><i class="fas fa-download me-2"></i>Download Application</button>
           </div>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-ticket-alt"></i></div>
-            <!--<h3 class="portal-title">Hall Ticket</h3>
-            <p class="portal-description">Download your entrance exam hall ticket</p><br>-->
             <button class="btn-gold w-100" onclick="showForm('hallticketForm')"><i class="fas fa-ticket-alt me-2"></i>Get Hall Ticket</button>
           </div>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-chart-line"></i></div>
-            <!--<h3 class="portal-title">Check Result</h3>
-            <p class="portal-description">Check your entrance examination result</p><br><br>-->
             <button class="btn-gold w-100" onclick="showForm('resultForm')"><i class="fas fa-search me-2"></i>Check Result</button>
           </div>
         </div>
@@ -618,13 +622,14 @@
     </div>
   </section>
 
+  <!-- Apply Now Form Section -->
   <section class="content-section" id="applyNowFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
         <h2 class="form-title"><i class="fas fa-file-alt me-2"></i>New Admission Application</h2>
         <div class="instructions-box mb-4">
           <h4 class="instructions-title"><i class="fas fa-lightbulb"></i> Important Notes</h4>
-          <p class="mb-0">പ്രവേശന പരീക്ഷ 15/02/2026 SUN 07.30 AM</p>
+          <p class="mb-0" id="examNote">പ്രവേശന പരീക്ഷ 15-02-2026 ഞായർ 07:30 AM</p>
         </div>
         <form id="newApplicationForm" onsubmit="return handleNewApplicationSubmit(event)">
           <div class="form-step">
@@ -645,13 +650,13 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-  <div class="mb-3">
-    <label class="form-label required">3. ജനന തിയ്യതി | Date of Birth:</label>
-    <input type="date" class="form-control" name="dob" max="2018-12-31" required onchange="calculateAge(this.value); updateDateDisplay(this.value, 'dobDisplay')">
-    <small class="text-muted" id="ageDisplay"></small>
-    <small class="text-muted" id="dobDisplay" style="display:none;"></small>
-  </div>
-</div>
+                <div class="mb-3">
+                  <label class="form-label required">3. ജനന തിയ്യതി | Date of Birth:</label>
+                  <input type="date" class="form-control" name="dob" max="2018-12-31" required onchange="calculateAge(this.value); updateDateDisplay(this.value, 'dobDisplay')">
+                  <small class="text-muted" id="ageDisplay"></small>
+                  <small class="text-muted" id="dobDisplay" style="display:none;"></small>
+                </div>
+              </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">4. ആധാര്‍ നമ്പര്‍ | Aadhaar Number:</label>
@@ -866,6 +871,7 @@
     </div>
   </section>
 
+  <!-- Download Application Form Section -->
   <section class="content-section" id="applicationFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -888,6 +894,7 @@
     </div>
   </section>
 
+  <!-- Hall Ticket Form Section -->
   <section class="content-section" id="hallticketFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -910,6 +917,7 @@
     </div>
   </section>
 
+  <!-- Result Form Section -->
   <section class="content-section" id="resultFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -933,19 +941,30 @@
   </section>
 </div>
 
+<!-- Document Display Area -->
 <div id="documentDisplayArea" style="display: none;"></div>
+
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/919048020243" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxO7KLtUlx_SciMT8UXBaluAbljZghqyiD4PY8XZrgg4mmy06wBj2MX0ixnO7R-zkBh0A/exec';
-  
+  // Initialize page with config values
   document.addEventListener('DOMContentLoaded', function() {
+    // Update ticker with config values
+    document.getElementById('tickerExamDate').innerHTML = `${CONFIG.EXAM_DATE_DDMMYYYY} ${CONFIG.EXAM_DAY_MALAYALAM} ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, ${CONFIG.APPLICATION_DEADLINE_DDMMYYYY} ന് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക`;
+    document.getElementById('tickerResultDate').innerHTML = `${CONFIG.RESULT_PUBLISH_DATE_DDMMYYYY} ${CONFIG.RESULT_PUBLISH_DAY_MALAYALAM} ${CONFIG.RESULT_PUBLISH_TIME} ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ റിസള്‍ട്ട് പബ്ലിഷ് ചെയ്യും`;
+    document.getElementById('examNote').innerHTML = `പ്രവേശന പരീക്ഷ ${CONFIG.EXAM_DATE_DDMMYYYY} ${CONFIG.EXAM_DAY_MALAYALAM} ${CONFIG.EXAM_TIME}`;
+    
     initializePage();
   });
-  
+
   let lastScrollTop = 0;
-  
+
   function initializePage() {
     AOS.init({
       duration: 800,
@@ -959,7 +978,7 @@
       input.setAttribute('max', today);
     });
   }
-  
+
   function showDashboard() {
     document.getElementById('mainContentArea').style.display = 'block';
     document.getElementById('documentDisplayArea').style.display = 'none';
@@ -979,7 +998,7 @@
     
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
-  
+
   function showForm(formId) {
     document.getElementById('mainContentArea').style.display = 'block';
     document.getElementById('documentDisplayArea').style.display = 'none';
@@ -995,81 +1014,54 @@
       window.scrollTo({top: formSection.offsetTop - 20, behavior: 'smooth'});
     }
   }
-  
+
   function calculateAge(dobString) {
-  if (!dobString) return;
+    if (!dobString) return;
 
-  const parts = dobString.split('-');
-  const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-  const birthDate = new Date(dobString);
-  const referenceDate = new Date('2026-02-15');     // Exam date
-
-  let years = referenceDate.getFullYear() - birthDate.getFullYear();
-  let months = referenceDate.getMonth() - birthDate.getMonth();
-  let days   = referenceDate.getDate()   - birthDate.getDate();
-
-  if (days < 0) {
-    months--;
-    days += new Date(referenceDate.getFullYear(), referenceDate.getMonth(), 0).getDate();
+    const birthDate = new Date(dobString);
+    const examDate = new Date(CONFIG.EXAM_DATE_ISO);
+    let years = examDate.getFullYear() - birthDate.getFullYear();
+    let months = examDate.getMonth() - birthDate.getMonth();
+    let days = examDate.getDate() - birthDate.getDate();
+    
+    if (days < 0) {
+      months--;
+      days += new Date(examDate.getFullYear(), examDate.getMonth(), 0).getDate();
+    }
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+    
+    const formattedDate = formatDateToDDMMYYYY(dobString);
+    document.getElementById('ageDisplay').textContent =
+      `Date of Birth: ${formattedDate} | Age as on ${CONFIG.EXAM_DATE_DDMMYYYY}: ${years} years ${months} months ${days} days`;
   }
 
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  document.getElementById('ageDisplay').textContent = 
-    `Date of Birth: ${formattedDate} | Age as on 15 Feb 2026: ${years} years ${months} months ${days} days`;
-}function calculateAge(dobString) {
-  if (!dobString) return;
-
-  const parts = dobString.split('-');
-  const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-
-  const birthDate = new Date(dobString);
-  const today = new Date();
-  let years = today.getFullYear() - birthDate.getFullYear();
-  let months = today.getMonth() - birthDate.getMonth();
-  let days = today.getDate() - birthDate.getDate();
-
-  if (days < 0) {
-    months--;
-    days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-  }
-
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  document.getElementById('ageDisplay').textContent = 
-    `Date of Birth: ${formattedDate} | Age: ${years} years ${months} months ${days} days`;
-}
-  
   function togglePreviousStudy(show) {
     document.getElementById('previous-study-section').style.display = show ? 'block' : 'none';
   }
-  
+
   function toggleIllnessSection(show) {
     document.getElementById('illness-section').style.display = show ? 'block' : 'none';
   }
-  
+
   function toggleSubmitButton(enabled) {
     document.getElementById('submitApplicationBtn').disabled = !enabled;
   }
-  
+
   function handleDragOver(e) {
     e.preventDefault();
     e.stopPropagation();
     document.getElementById('fileUploadContainer').classList.add('dragover');
   }
-  
+
   function handleDragLeave(e) {
     e.preventDefault();
     e.stopPropagation();
     document.getElementById('fileUploadContainer').classList.remove('dragover');
   }
-  
+
   function handleDrop(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -1079,14 +1071,14 @@
       handleFile(files[0]);
     }
   }
-  
+
   function handlePhotoUpload(e) {
     const file = e.target.files[0];
     if (file) {
       handleFile(file);
     }
   }
-  
+
   function handleFile(file) {
     if (!file.type.startsWith('image/')) {
       alert('Please upload an image file');
@@ -1106,7 +1098,7 @@
     };
     reader.readAsDataURL(file);
   }
-  
+
   function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -1115,704 +1107,609 @@
       reader.readAsDataURL(file);
     });
   }
-  
+
   function generateApplicationHtml(data) {
-  const { collegeInfo, studentData } = data;
-  const hasValidPhoto = studentData.photoUrl && (
-    studentData.photoUrl.includes('drive.google.com') ||
-    studentData.photoUrl.startsWith('data:image') ||
-    studentData.photoUrl.startsWith('http')
-  );
-  
-  function formatDate(dateString) {
-    if (!dateString) return 'N/A';
-    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      const parts = dateString.split('-');
-      return `${parts[2]}-${parts[1]}-${parts[0]}`;
-    }
-    return dateString;
-  }
-  
-  const formattedSubmissionDate = studentData.submissionDate ? 
-    (studentData.submissionDate.match(/^\d{4}-\d{2}-\d{2}$/) ? 
-      formatDate(studentData.submissionDate) : studentData.submissionDate) : 
-    formatDate(new Date().toISOString().split('T')[0]);
-  
-  const formattedDob = formatDate(studentData.dob);
-  
-  return `
-    <div class="document-container">
-      <div class="document-watermark">APPLICATION FORM</div>
-      <div class="document-header">
-        <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo">
-        <div class="document-college-info">
-          <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
-          <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
-          <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
-          <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
-          <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-          <div class="document-title">Admission Application Form</div>
-        </div>
-      </div>
-      <div class="document-content">
-        ${hasValidPhoto ? `
-          <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
-            <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
-              <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
-            </div>
-            <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
+    const { collegeInfo, studentData } = data;
+    const hasValidPhoto = studentData.photoUrl && (
+      studentData.photoUrl.includes('drive.google.com') ||
+      studentData.photoUrl.startsWith('data:image') ||
+      studentData.photoUrl.startsWith('http')
+    );
+
+    const formattedSubmissionDate = formatDateForDisplay(studentData.submissionDate || new Date().toISOString().split('T')[0]);
+    const formattedDob = formatDateForDisplay(studentData.dob);
+
+    return `
+      <div class="document-container">
+        <div class="document-watermark">APPLICATION FORM</div>
+        <div class="document-header">
+          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Admission Application Form</div>
           </div>
-        ` : ''}
-        <div class="document-section-title">1. Personal Information</div>
-        <div class="info-grid1" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-          ${['Application Date','Application ID',"1. Student's Name","2. House Name","3. Date of Birth","4. Aadhaar Number","5. Address","6. Phone Number","7. WhatsApp Number"].map((label, i) => `
-            <div class="info-item">
-              <span class="info-label">${label}:</span>
-              <span class="info-value">${escapeHtml([formattedSubmissionDate, studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', studentData.houseName || 'N/A', formattedDob, studentData.aadhaarNumber || 'N/A', studentData.address || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.whatsappNumber || 'N/A'][i])}</span>
-            </div>
-          `).join('')}
         </div>
-        <!-- Rest of the function remains exactly the same -->
-        <div class="document-section-title">2. Parent/Guardian Information</div>
-        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-          ${["8. Father's Name","9. Father's Occupation","10. Guardian's Name","11. Relationship with Guardian"].map((label, i) => `
-            <div class="info-item">
-              <span class="info-label">${label}:</span>
-              <span class="info-value">${escapeHtml([studentData.fatherName || 'N/A', studentData.fatherOccupation || 'N/A', studentData.guardianName || 'N/A', studentData.relationshipWithGuardian || 'N/A'][i])}</span>
-            </div>
-          `).join('')}
-          ${studentData.guardianReason ? `
-            <div class="info-item">
-              <span class="info-label">12. Reason if Guardian is not Father:</span>
-              <span class="info-value">${escapeHtml(studentData.guardianReason)}</span>
+        <div class="document-content">
+          ${hasValidPhoto ? `
+            <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
+              <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+                <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
+              </div>
+              <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
             </div>
           ` : ''}
-        </div>
-        <div class="document-section-title">3. Educational Information</div>
-        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-          ${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label, i) => `
-            <div class="info-item">
-              <span class="info-label">${label}:</span>
-              <span class="info-value">${escapeHtml([studentData.madrasa || 'N/A', studentData.madrasaclass || 'N/A', studentData.school || 'N/A', studentData.schoolclass || 'N/A', studentData.previousStudy || 'No'][i])}</span>
-            </div>
-          `).join('')}
-        </div>
-        ${studentData.previousStudy === 'Yes' ? `
-          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-            ${studentData.previousInstitution ? `
-              <div class="info-item">
-                <span class="info-label">Previous Institution:</span>
-                <span class="info-value">${escapeHtml(studentData.previousInstitution || 'N/A')}</span>
-              </div>
-            ` : ''}
-            ${studentData.studyDuration ? `
-              <div class="info-item">
-                <span class="info-label">Duration of Study:</span>
-                <span class="info-value">${escapeHtml(studentData.studyDuration || 'N/A')}</span>
-              </div>
-            ` : ''}
-            ${studentData.juzCount ? `
-              <div class="info-item">
-                <span class="info-label">Number of Juz:</span>
-                <span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span>
-              </div>
-            ` : ''}
-            ${studentData.reasonForLeaving ? `
-              <div class="info-item">
-                <span class="info-label">Reason for Leaving:</span>
-                <span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span>
-              </div>
-            ` : ''}
-            ${studentData.headTeacherPhone ? `
-              <div class="info-item">
-                <span class="info-label">Head Teacher's Phone Number:</span>
-                <span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span>
-              </div>
-            ` : ''}
-          </div>
-        ` : ''}
-        <div class="document-section-title">4. Medical & Identification</div>
-        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-          ${["16. Identification Mark","17. Physical Fitness"].map((label, i) => `
-            <div class="info-item">
-              <span class="info-label">${label}:</span>
-              <span class="info-value">${escapeHtml([studentData.identificationMark || 'N/A', studentData.physicalFitness || 'N/A'][i])}</span>
-            </div>
-          `).join('')}
-          ${studentData.illness ? `
-            <div class="info-item">
-              <span class="info-label">Illness:</span>
-              <span class="info-value">${escapeHtml(studentData.illness)}</span>
-            </div>
-          ` : ''}
-        </div>
-        <div class="document-declaration">
-          <h3 class="document-section-title">Declaration</h3>
-          <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
-            <strong>${escapeHtml(studentData.studentName || studentData.name || '')}</strong> S/o
-            <strong>${escapeHtml(studentData.guardianName || '')}</strong>,
-            എന്ന എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
-          </p>
-          <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
-            <div style="flex: 0 0 auto;">
-              <div style="margin-bottom: 14px;">Date: ______________________________</div>
-              <div>Place: _____________________________</div>
-            </div>
-            <div style="text-align: right; flex: 1;">
-              <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
-              <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="document-footer">
-        <p style="color:#495057;font-size:10px;margin:0;">
-          <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
-        </p>
-      </div>
-    </div>
-    <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-      <button onclick="window.print()" class="btn-gold me-2">
-        <i class="fas fa-print me-2"></i> Print Application Form
-      </button>
-      <button onclick="showDashboard()" class="btn-outline-gold">
-        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-      </button>
-    </div>
-  `;
-}
-  
-  function generateHallticketHtml(data) {
-  const { collegeInfo, studentData } = data;
-  const hasValidPhoto = studentData.photoUrl && (
-    studentData.photoUrl.includes('drive.google.com') ||
-    studentData.photoUrl.startsWith('data:image') ||
-    studentData.photoUrl.startsWith('http')
-  );
-  
-  function formatDate(dateString) {
-    if (!dateString) return 'N/A';
-    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      const parts = dateString.split('-');
-      return `${parts[2]}-${parts[1]}-${parts[0]}`;
-    }
-    return dateString;
-  }
-  
-  const formattedDob = formatDate(studentData.dob);
-  
-  const qrText = `Name: ${studentData.studentName || studentData.name || ''}, Register No: ${studentData.registerNo || studentData.applicationId || ''}, DoB: ${formattedDob}, Exam Date: 15-02-2026, Venue: HIM Puthanpalli`;
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
-  
-  return `
-    <div class="document-container">
-      <div class="document-watermark">HALL TICKET</div>
-      <div class="document-header">
-        <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo">
-        <div class="document-college-info">
-          <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
-          <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
-          <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
-          <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
-          <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-          <div class="document-title">Entrance Exam Hall Ticket</div>
-        </div>
-      </div>
-      <div class="document-content">
-        ${hasValidPhoto ? `
-          <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
-            <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
-              <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
-            </div>
-            <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
-          </div>
-        ` : ''}
-        <div class="student-info-box" style="margin-right: ${hasValidPhoto ? '150px' : '0'};">
-          <div class="info-grid1">
-            ${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study'].map((label, i) => `
+          <div class="document-section-title">1. Personal Information</div>
+          <div class="info-grid1" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${['Application Date','Application ID',"1. Student's Name","2. House Name","3. Date of Birth","4. Aadhaar Number","5. Address","6. Phone Number","7. WhatsApp Number"].map((label, i) => `
               <div class="info-item">
                 <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([studentData.registerNo || studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', formattedDob, studentData.age || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.houseName || 'N/A', studentData.address || 'N/A', studentData.previousStudy || 'N/A'][i])}</span>
+                <span class="info-value">${escapeHtml([formattedSubmissionDate, studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', studentData.houseName || 'N/A', formattedDob, studentData.aadhaarNumber || 'N/A', studentData.address || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.whatsappNumber || 'N/A'][i])}</span>
               </div>
             `).join('')}
           </div>
+          <div class="document-section-title">2. Parent/Guardian Information</div>
+          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${["8. Father's Name","9. Father's Occupation","10. Guardian's Name","11. Relationship with Guardian"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.fatherName || 'N/A', studentData.fatherOccupation || 'N/A', studentData.guardianName || 'N/A', studentData.relationshipWithGuardian || 'N/A'][i])}</span>
+              </div>
+            `).join('')}
+            ${studentData.guardianReason ? `
+              <div class="info-item">
+                <span class="info-label">12. Reason if Guardian is not Father:</span>
+                <span class="info-value">${escapeHtml(studentData.guardianReason)}</span>
+              </div>
+            ` : ''}
+          </div>
+          <div class="document-section-title">3. Educational Information</div>
+          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.madrasa || 'N/A', studentData.madrasaclass || 'N/A', studentData.school || 'N/A', studentData.schoolclass || 'N/A', studentData.previousStudy || 'No'][i])}</span>
+              </div>
+            `).join('')}
+          </div>
+          ${studentData.previousStudy === 'Yes' ? `
+            <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+              ${studentData.previousInstitution ? `
+                <div class="info-item">
+                  <span class="info-label">Previous Institution:</span>
+                  <span class="info-value">${escapeHtml(studentData.previousInstitution || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.studyDuration ? `
+                <div class="info-item">
+                  <span class="info-label">Duration of Study:</span>
+                  <span class="info-value">${escapeHtml(studentData.studyDuration || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.juzCount ? `
+                <div class="info-item">
+                  <span class="info-label">Number of Juz:</span>
+                  <span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.reasonForLeaving ? `
+                <div class="info-item">
+                  <span class="info-label">Reason for Leaving:</span>
+                  <span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span>
+                </div>
+              ` : ''}
+              ${studentData.headTeacherPhone ? `
+                <div class="info-item">
+                  <span class="info-label">Head Teacher's Phone Number:</span>
+                  <span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span>
+                </div>
+              ` : ''}
+            </div>
+          ` : ''}
+          <div class="document-section-title">4. Medical & Identification</div>
+          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${["16. Identification Mark","17. Physical Fitness"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.identificationMark || 'N/A', studentData.physicalFitness || 'N/A'][i])}</span>
+              </div>
+            `).join('')}
+            ${studentData.illness ? `
+              <div class="info-item">
+                <span class="info-label">Illness:</span>
+                <span class="info-value">${escapeHtml(studentData.illness)}</span>
+              </div>
+            ` : ''}
+          </div>
+          <div class="document-declaration">
+            <h3 class="document-section-title">Declaration</h3>
+            <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
+              <strong>${escapeHtml(studentData.studentName || studentData.name || '')}</strong> S/o
+              <strong>${escapeHtml(studentData.guardianName || '')}</strong>,
+              എന്ന എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
+            </p>
+            <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
+              <div style="flex: 0 0 auto;">
+                <div style="margin-bottom: 14px;">Date: ______________________________</div>
+                <div>Place: _____________________________</div>
+              </div>
+              <div style="text-align: right; flex: 1;">
+                <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
+                <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="exam-wrapper">
-          <div class="exam-details-box">
-            <div class="exam-title">Examination Details</div>
-            <div class="exam-info-grid">
-              ${['Exam Date','Reporting Time','Exam Duration','Venue'].map((label, i) => `
-                <div class="exam-item">
-                  <div class="exam-label">${label}</div>
-                  <div class="exam-value">${['15-02-2026','07:30 AM','08:00 AM - 12:30 PM','HIM Puthanpalli'][i]}</div>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
+          </p>
+        </div>
+      </div>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Application Form
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
+      </div>
+    `;
+  }
+
+  function generateHallticketHtml(data) {
+    const { collegeInfo, studentData } = data;
+    const hasValidPhoto = studentData.photoUrl && (
+      studentData.photoUrl.includes('drive.google.com') ||
+      studentData.photoUrl.startsWith('data:image') ||
+      studentData.photoUrl.startsWith('http')
+    );
+
+    const formattedDob = formatDateForDisplay(studentData.dob);
+
+    const qrText = `Name: ${studentData.studentName || studentData.name || ''}, ` +
+                   `Register No: ${studentData.registerNo || studentData.applicationId || ''}, ` +
+                   `DoB: ${formattedDob}, Exam Date: ${CONFIG.EXAM_DATE_DDMMYYYY}, Venue: ${CONFIG.EXAM_VENUE}`;
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
+
+    return `
+      <div class="document-container">
+        <div class="document-watermark">HALL TICKET</div>
+        <div class="document-header">
+          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Entrance Exam Hall Ticket</div>
+          </div>
+        </div>
+        <div class="document-content">
+          ${hasValidPhoto ? `
+            <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
+              <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+                <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
+              </div>
+              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
+            </div>
+          ` : ''}
+          <div class="student-info-box" style="margin-right: ${hasValidPhoto ? '150px' : '0'};">
+            <div class="info-grid1">
+              ${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study'].map((label, i) => `
+                <div class="info-item">
+                  <span class="info-label">${label}:</span>
+                  <span class="info-value">${escapeHtml([studentData.registerNo || studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', formattedDob, studentData.age || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.houseName || 'N/A', studentData.address || 'N/A', studentData.previousStudy || 'N/A'][i])}</span>
                 </div>
               `).join('')}
             </div>
           </div>
-          <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
-            <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
-              <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code">
+          <div class="exam-wrapper">
+            <div class="exam-details-box">
+              <div class="exam-title">Examination Details</div>
+              <div class="exam-info-grid">
+                ${['Exam Date','Reporting Time','Exam Duration','Venue'].map((label, i) => `
+                  <div class="exam-item">
+                    <div class="exam-label">${label}</div>
+                    <div class="exam-value">${[CONFIG.EXAM_DATE_DDMMYYYY, CONFIG.EXAM_REPORTING_TIME, CONFIG.EXAM_DURATION, CONFIG.EXAM_VENUE][i]}</div>
+                  </div>
+                `).join('')}
+              </div>
             </div>
-            <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div>
+            <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
+              <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
+                <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code">
+              </div>
+              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div>
+            </div>
+          </div>
+          <table class="signing-table">
+            <thead>
+              <tr><th>QIRA'ATH</th><th>HIFZ</th><th>SPOT</th><th>GK</th><th>MEMORY TEST</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="document-instructions">
+            <div class="document-instructions-title">Important Instructions</div>
+            <ul class="document-instructions-list">
+              <li>Bring this hall ticket to the exam center</li>
+              <li>Carry any original ID proof (Aadhaar card)</li>
+              <li>Report at the exam center 30 minutes before exam time</li>
+              <li>No electronic devices allowed inside exam hall</li>
+              <li>Only blue/black ballpoint pens are allowed</li>
+              <li>Follow all instructions given by invigilators</li>
+            </ul>
           </div>
         </div>
-        <table class="signing-table">
-          <thead>
-            <tr><th>QIRA'ATH</th><th>HIFZ</th><th>SPOT</th><th>GK</th><th>MEMORY TEST</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="document-instructions">
-          <div class="document-instructions-title">Important Instructions</div>
-          <ul class="document-instructions-list">
-            <li>Bring this hall ticket to the exam center</li>
-            <li>Carry any original ID proof (Aadhaar card)</li>
-            <li>Report at the exam center 30 minutes before exam time</li>
-            <li>No electronic devices allowed inside exam hall</li>
-            <li>Only blue/black ballpoint pens are allowed</li>
-            <li>Follow all instructions given by invigilators</li>
-          </ul>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
+          </p>
         </div>
       </div>
-      <div class="document-footer">
-        <p style="color:#495057;font-size:10px;margin:0;">
-          <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
-        </p>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Hall Ticket
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
       </div>
-    </div>
-    <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-      <button onclick="window.print()" class="btn-gold me-2">
-        <i class="fas fa-print me-2"></i> Print Hall Ticket
-      </button>
-      <button onclick="showDashboard()" class="btn-outline-gold">
-        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-      </button>
-    </div>
-  `;
-}
+    `;
+  }
+
   function generateResultHtml(data) {
-  const { collegeInfo, studentData } = data;
-  
-  function formatDate(dateString) {
-    if (!dateString) return 'N/A';
-    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      const parts = dateString.split('-');
-      return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    const { collegeInfo, studentData } = data;
+
+    const formattedDob = formatDateForDisplay(studentData.dob);
+
+    let statusText = "NOT QUALIFIED";
+    let statusColor = "#dc3545";
+    let malayalamNote = "";
+    
+    if (studentData.result === "QUALIFIED") {
+      statusText = "QUALIFIED";
+      statusColor = "#28a745";
+      malayalamNote = `പ്രിയ വിദ്യാർത്ഥി, താങ്കൾ പ്രവേശന പരീക്ഷയിൽ വിജയിച്ചു. അഭിനന്ദനങ്ങള്‍...
+      നിശ്ചിത തീയതിക്കുള്ളിൽ പ്രവേശന നടപടികൾ പൂർത്തീകരിക്കണം. ആധാർ, ജനന സർട്ടിഫിക്കറ്റ്, റേഷന്‍ കാർഡ് എന്നിവയുടെ രണ്ട് വീതം കോപ്പികള്‍ കൊണ്ടുവരിക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`;
     }
-    return dateString;
-  }
-  
-  const formattedDob = formatDate(studentData.dob);
-  
-  let statusText = "NOT QUALIFIED";
-  let statusColor = "#dc3545";
-  let malayalamNote = "";
-
-  if (studentData.result === "QUALIFIED") {
-    statusText = "QUALIFIED";
-    statusColor = "#28a745";
-    malayalamNote = `പ്രിയ വിദ്യാർത്ഥി, താങ്കൾ പ്രവേശന പരീക്ഷയിൽ വിജയിച്ചു. അഭിനന്ദനങ്ങള്‍... 
-    നിശ്ചിത തീയതിക്കുള്ളിൽ പ്രവേശന നടപടികൾ പൂർത്തീകരിക്കണം. ആധാർ, ജനന സർട്ടിഫിക്കറ്റ്, റേഷന്‍ കാർഡ് എന്നിവയുടെ രണ്ട് വീതം കോപ്പികള്‍ കൊണ്ടുവരിക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`; 
-  } 
-  else if (studentData.result === "WAITING LIST") {
-    statusText = "WAITING LIST";
-    statusColor = "#007bff";
-    malayalamNote = `മെച്ചപ്പെട്ട രീതിയില്‍ കൂടുതല്‍ മുന്നൊരുക്കം നടത്തി രണ്ടാം ഘട്ട പ്രവേശന പരീക്ഷയില്‍ യോഗ്യത നേടുക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`; 
-  } 
-  else {
-    statusText = "NOT QUALIFIED";
-    statusColor = "#dc3545";
-    malayalamNote = `ഈ വർഷം യോഗ്യത ലഭിച്ചില്ല, കോളേജ് മാനദണ്ഡ പ്രായപരിധി പ്രകാരം അടുത്ത വർഷവും അപേക്ഷിക്കാന്‍ സാധിക്കുമെങ്കില്‍ അടുത്ത വർഷം വീണ്ടും ശ്രമിക്കുക. അല്ലെങ്കിൽ മറ്റ് കോളേജുകളിൽ പ്രവേശനം തേടുക.`; 
-  }
-
-  const isQualified = studentData.result === "QUALIFIED";
-  const isWaitingList = studentData.result === "WAITING LIST";
-  const isQualifiedOrWaiting = isQualified || isWaitingList;
-
-  return `
-    <div class="document-container">
-      <div class="document-watermark">${statusText}</div>
-      <div class="document-header">
-        <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo">
-        <div class="document-college-info">
-          <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
-          <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
-          <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
-          <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
-          <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-          <div class="document-title">Entrance Exam Result</div>
-        </div>
-      </div>
-      <div class="document-content">
-        <div class="student-info-box">
-          <div class="info-grid">
-            ${['Student Name','Mobile Number','Date of Birth'].map((label, i) => `
-              <div class="info-item">
-                <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([studentData.name || studentData.studentName || 'N/A', studentData.mobile || studentData.phoneNumber || 'N/A', formattedDob][i])}</span>
-              </div>
-            `).join('')}
+    else if (studentData.result === "WAITING LIST") {
+      statusText = "WAITING LIST";
+      statusColor = "#007bff";
+      malayalamNote = `മെച്ചപ്പെട്ട രീതിയില്‍ കൂടുതല്‍ മുന്നൊരുക്കം നടത്തി രണ്ടാം ഘട്ട പ്രവേശന പരീക്ഷയില്‍ യോഗ്യത നേടുക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`;
+    }
+    else {
+      statusText = "NOT QUALIFIED";
+      statusColor = "#dc3545";
+      malayalamNote = `ഈ വർഷം യോഗ്യത ലഭിച്ചില്ല, കോളേജ് മാനദണ്ഡ പ്രായപരിധി പ്രകാരം അടുത്ത വർഷവും അപേക്ഷിക്കാന്‍ സാധിക്കുമെങ്കില്‍ അടുത്ത വർഷം വീണ്ടും ശ്രമിക്കുക. അല്ലെങ്കിൽ മറ്റ് കോളേജുകളിൽ പ്രവേശനം തേടുക.`;
+    }
+    
+    const isQualified = studentData.result === "QUALIFIED";
+    const isWaitingList = studentData.result === "WAITING LIST";
+    const isQualifiedOrWaiting = isQualified || isWaitingList;
+    
+    return `
+      <div class="document-container">
+        <div class="document-watermark">${statusText}</div>
+        <div class="document-header">
+          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Entrance Exam Result</div>
           </div>
         </div>
-        <div class="result-section-box" style="border-color: ${statusColor};">
-          <div class="result-status" style="color: ${statusColor};">${statusText}</div>
-          ${isQualifiedOrWaiting ? `<div class="result-rank">Rank: ${escapeHtml(studentData.rank || 'N/A')}</div>` : ''}
-          ${isQualified ? `
-            <div class="admission-info-box">
-              <div class="admission-title">Admission Details</div>
-              <div class="admission-row">
-                <span class="admission-label">Admission Starts:</span>
-                <span class="admission-value">പിന്നീട് അറിയിക്കും</span>
-              </div>
-              <div class="admission-row">
-                <span class="admission-label">Class Starts:</span>
-                <span class="admission-value">പിന്നീട് അറിയിക്കും</span>
-              </div>
+        <div class="document-content">
+          <div class="student-info-box">
+            <div class="info-grid">
+              ${['Student Name','Mobile Number','Date of Birth'].map((label, i) => `
+                <div class="info-item">
+                  <span class="info-label">${label}:</span>
+                  <span class="info-value">${escapeHtml([studentData.name || studentData.studentName || 'N/A', studentData.mobile || studentData.phoneNumber || 'N/A', formattedDob][i])}</span>
+                </div>
+              `).join('')}
             </div>
-          ` : ''}
-          <div class="note-section malayalam-msg" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
-            <div class="note-title">📌 Important Note</div>
-            <div class="note-content" style="white-space: pre-line;">${escapeHtml(malayalamNote)}</div>
+          </div>
+          <div class="result-section-box" style="border-color: ${statusColor};">
+            <div class="result-status" style="color: ${statusColor};">${statusText}</div>
+            ${isQualifiedOrWaiting ? `<div class="result-rank">Rank: ${escapeHtml(studentData.rank || 'N/A')}</div>` : ''}
+            ${isQualified ? `
+              <div class="admission-info-box">
+                <div class="admission-title">Admission Details</div>
+                <div class="admission-row">
+                  <span class="admission-label">Admission Starts:</span>
+                  <span class="admission-value">${CONFIG.ADMISSION_STARTS}</span>
+                </div>
+                <div class="admission-row">
+                  <span class="admission-label">Class Starts:</span>
+                  <span class="admission-value">${CONFIG.CLASS_STARTS}</span>
+                </div>
+              </div>
+            ` : ''}
+            <div class="note-section malayalam-msg" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
+              <div class="note-title">📌 Important Note</div>
+              <div class="note-content" style="white-space: pre-line;">${escapeHtml(malayalamNote)}</div>
+            </div>
           </div>
         </div>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
+          </p>
+        </div>
       </div>
-      <div class="document-footer">
-        <p style="color:#495057;font-size:10px;margin:0;">
-          <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
-        </p>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Result
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
       </div>
-    </div>
-    <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-      <button onclick="window.print()" class="btn-gold me-2">
-        <i class="fas fa-print me-2"></i> Print Result
-      </button>
-      <button onclick="showDashboard()" class="btn-outline-gold">
-        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-      </button>
-    </div>
-  `;
-}
-  
+    `;
+  }
+
   function displayDocument(htmlContent) {
     document.getElementById('mainContentArea').style.display = 'none';
     document.getElementById('documentDisplayArea').style.display = 'block';
     document.getElementById('documentDisplayArea').innerHTML = htmlContent;
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
-  
+
   async function handleApplicationSubmit(e) {
-  e.preventDefault();
-  showLoading('Searching Application', 'Please wait while we fetch your details');
-  
-  const mobile = document.getElementById('appMobile').value.trim();
-  const dob = document.getElementById('appDob').value;
-  
-  try {
-    const response = await fetch(`${SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
-    const data = await response.json();
-    
-    setTimeout(() => {
-      hideLoading();
-      if (data.status === 'success') {
-        const html = generateApplicationHtml(data);
-        displayDocument(html);
-      } else {
-        alert('Application not found. Please check your details.');
-      }
-    }, 1500);
-  } catch (error) {
-    hideLoading();
-    console.error('Error:', error);
-    alert('An error occurred. Please try again.');
-  }
-}
-  
-  async function handleHallticketSubmit(e) {
-  e.preventDefault();
-  showLoading('Generating Hall Ticket', 'Please wait while we prepare your document');
-  
-  const mobile = document.getElementById('ticketMobile').value.trim();
-  const dob = document.getElementById('ticketDob').value;
-  
-  try {
-    const response = await fetch(`${SCRIPT_URL}?type=hallticket&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
-    const data = await response.json();
-    
-    setTimeout(() => {
-      hideLoading();
-      if (data.status === 'success') {
-        const html = generateHallticketHtml(data);
-        displayDocument(html);
-      } else {
-        alert('Hall ticket not found. Please check your details.');
-      }
-    }, 1500);
-  } catch (error) {
-    hideLoading();
-    console.error('Error:', error);
-    alert('An error occurred. Please try again.');
-  }
-}
-  async function debugPublishDate() {
-  try {
-    const response = await fetch(`${SCRIPT_URL}?type=result_settings`);
-    const data = await response.json();
-    console.log("Publish date from server:", data.publishDate);
-    
-    if (data.publishDate) {
-      const regex = /^(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})\s*(AM|PM)$/i;
-      const match = data.publishDate.match(regex);
-      
-      if (match) {
-        console.log("Date parts:", {
-          year: match[1],
-          month: match[2],
-          day: match[3],
-          hour: match[4],
-          minute: match[5],
-          ampm: match[6]
-        });
-      }
-    }
-    
-    alert("Check console (F12) for debug info");
-  } catch (error) {
-    console.error("Debug error:", error);
-  }
-}
+    e.preventDefault();
+    showLoading('Searching Application', 'Please wait while we fetch your details');
 
-  async function handleResultSubmit(e) {
-  e.preventDefault();
-  showLoading('Checking Result', 'Please wait while we retrieve your result');
-  
-  const mobile = document.getElementById('resultMobile').value.trim();
-  const dob = document.getElementById('resultDob').value;
+    const mobile = document.getElementById('appMobile').value.trim();
+    const dob = document.getElementById('appDob').value;
 
-  try {
-    const allResultsResponse = await fetch(`${SCRIPT_URL}?type=all_results`);
-    const allResults = await allResultsResponse.json();
-    
-    if (allResults.status !== 'success') {
-      hideLoading();
-      alert("Error fetching results. Please try again.");
-      return;
-    }
-    
-    const studentResult = allResults.data.find(row => {
-      const rowMobile = String(row["MOBILE NO"] || "").trim();
-      const rowDob = String(row["DATE OF BIRTH"] || "").trim();
-      return rowMobile === mobile && rowDob === dob;
-    });
-    
-    if (!studentResult) {
-      hideLoading();
-      alert('No result found for this mobile number and date of birth.');
-      return;
-    }
-    
-    const resultDateStr = studentResult["RESULT DATE"];
-    
-    if (!resultDateStr || resultDateStr.toString().trim() === "") {
-      hideLoading();
-      alert("⚠️ Your result is not yet published.\n\nPlease check back later.");
-      return;
-    }
-    
-    const publishDateStr = resultDateStr.toString().trim();
-    const regex = /^(\d{4})-(\d{2})-(\d{2}) (\d{1,2}):(\d{2}) (AM|PM)$/i;
-    const matches = publishDateStr.match(regex);
-    
-    if (!matches) {
-      console.error("Invalid date format:", publishDateStr);
-      hideLoading();
-      alert("⚠️ Result date format is incorrect. Please contact college office.");
-      return;
-    }
-    
-    let year = parseInt(matches[1]);
-    let month = parseInt(matches[2]) - 1;
-    let day = parseInt(matches[3]);
-    let hour = parseInt(matches[4]);
-    let minute = parseInt(matches[5]);
-    let ampm = matches[6].toUpperCase();
-    
-    if (ampm === 'PM' && hour < 12) hour += 12;
-    if (ampm === 'AM' && hour === 12) hour = 0;
-    
-    const istDateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}T${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}:00+05:30`;
-    const publishDate = new Date(istDateStr);
-    const now = new Date();
-    
-    if (now.getTime() < publishDate.getTime()) {
-      const options = { 
-        timeZone: 'Asia/Kolkata', 
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long', 
-        day: 'numeric',
-        hour: 'numeric', 
-        minute: '2-digit',
-        hour12: true 
-      };
-      
-      const formattedDate = publishDate.toLocaleString('en-IN', options);
-      const diffMs = publishDate.getTime() - now.getTime();
-      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-      const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-      
-      hideLoading();
-      alert(`⏰ Your Result is Not Yet Published\n\n` +
-            `📅 Publication Date: ${formattedDate} IST\n` +
-            `⏳ Time remaining: Approximately ${diffHours} hours ${diffMinutes} minutes\n\n` +
-            `Please check back after this time.`);
-      return;
-    }
-    
-    const response = await fetch(`${SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
-    const data = await response.json();
-    
-    setTimeout(() => {
-      hideLoading();
-      if (data.status === 'success') {
-        const html = generateResultHtml(data);
-        displayDocument(html);
-      } else {
-        alert('Error fetching result details.');
-      }
-    }, 1500);
-
-  } catch (err) {
-    hideLoading();
-    console.error("Error in handleResultSubmit:", err);
-    alert("Error checking result. Please try again or contact support.");
-  }
-}
-
-
-  async function testPublishDate() {
-  try {
-    const response = await fetch(`${SCRIPT_URL}?type=result_settings`);
-    const data = await response.json();
-    console.log("=== PUBLISH DATE DEBUG ===");
-    console.log("Full response:", data);
-    
-    if (data.publishDate) {
-      console.log("Publish date string:", data.publishDate);
-      console.log("Type:", typeof data.publishDate);
-      console.log("Length:", data.publishDate.length);
-      
-      const testDate = new Date(data.publishDate);
-      console.log("Parsed as Date:", testDate.toString());
-      console.log("Timestamp:", testDate.getTime());
-      
-      alert(`Publish date from sheet: ${data.publishDate}\n\nCheck console for more details (F12)`);
-    } else {
-      alert("No publish date found in column F");
-    }
-  } catch (error) {
-    console.error("Debug error:", error);
-    alert("Error: " + error.message);
-  }
-}
-
-async function debugResultSettings() {
-  try {
-    const response = await fetch(`${SCRIPT_URL}?type=result_settings`);
-    const data = await response.json();
-    console.log("Result settings full response:", data);
-    alert("Check console (F12) for debug info");
-  } catch (error) {
-    console.error("Debug error:", error);
-  }
-}
-
-  async function handleNewApplicationSubmit(e) {
-  e.preventDefault();
-  showLoading('Submitting Application', 'Please wait while we process your application');
-  
-  const form = e.target;
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-  const photoFile = document.getElementById('photoInput').files[0];
-  
-  if (photoFile) {
     try {
-      const photoData = await readFileAsBase64(photoFile);
-      data.photo = JSON.stringify({
-        name: photoFile.name,
-        mimeType: photoFile.type,
-        data: photoData.split(',')[1]
-      });
+      const response = await fetch(`${CONFIG.SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
+      const data = await response.json();
+      
+      setTimeout(() => {
+        hideLoading();
+        if (data.status === 'success') {
+          const html = generateApplicationHtml(data);
+          displayDocument(html);
+        } else {
+          alert('Application not found. Please check your details.');
+        }
+      }, 1500);
     } catch (error) {
       hideLoading();
-      alert('Error processing photo. Please try again.');
-      return;
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
   }
-  
-  const submitData = new URLSearchParams();
-  for (const [key, value] of Object.entries(data)) {
-    if (value !== undefined && value !== null) {
-      submitData.append(key, value);
-    }
-  }
-  
-  try {
-    const response = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: submitData,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
-    
-    const result = await response.json();
-    
-    setTimeout(() => {  
+
+  async function handleHallticketSubmit(e) {
+    e.preventDefault();
+    showLoading('Generating Hall Ticket', 'Please wait while we prepare your document');
+
+    const mobile = document.getElementById('ticketMobile').value.trim();
+    const dob = document.getElementById('ticketDob').value;
+
+    try {
+      const response = await fetch(`${CONFIG.SCRIPT_URL}?type=hallticket&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
+      const data = await response.json();
+      
+      setTimeout(() => {
+        hideLoading();
+        if (data.status === 'success') {
+          const html = generateHallticketHtml(data);
+          displayDocument(html);
+        } else {
+          alert('Hall ticket not found. Please check your details.');
+        }
+      }, 1500);
+    } catch (error) {
       hideLoading();
-      if (result.status === 'success') {
-        form.reset();
-        document.getElementById('photoPreview').style.display = 'none';
-        toggleSubmitButton(false);
-        
-        const mockData = {
-          collegeInfo: {
-            logo: 'https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg',
-            contact: 'كلية الحافظ ممو ملا لتحفيظ القرآن',
-            collegeName: 'AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN',
-            underOrg: 'Under QUWATHUL ISLAM SANGAM',
-            affiliation: 'Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD',
-            address: 'Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District'
-          },
-          studentData: {
-            ...data,
-            submissionDate: new Date().toLocaleDateString(),
-            applicationId: result.data.applicationId || 'APP-' + Date.now(),
-            photoUrl: photoFile ? URL.createObjectURL(photoFile) : null
-          }
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  }
+
+  async function handleResultSubmit(e) {
+    e.preventDefault();
+    showLoading('Checking Result', 'Please wait while we retrieve your result');
+
+    const mobile = document.getElementById('resultMobile').value.trim();
+    const dob = document.getElementById('resultDob').value;
+    
+    try {
+      const allResultsResponse = await fetch(`${CONFIG.SCRIPT_URL}?type=all_results`);
+      const allResults = await allResultsResponse.json();
+      
+      if (allResults.status !== 'success') {
+        hideLoading();
+        alert("Error fetching results. Please try again.");
+        return;
+      }
+      
+      const studentResult = allResults.data.find(row => {
+        const rowMobile = String(row["MOBILE NO"] || "").trim();
+        const rowDob = String(row["DATE OF BIRTH"] || "").trim();
+        return rowMobile === mobile && rowDob === dob;
+      });
+      
+      if (!studentResult) {
+        hideLoading();
+        alert('No result found for this mobile number and date of birth.');
+        return;
+      }
+      
+      const resultDateStr = studentResult["RESULT DATE"];
+      
+      if (!resultDateStr || resultDateStr.toString().trim() === "") {
+        hideLoading();
+        alert("⚠️ Your result is not yet published.\n\nPlease check back later.");
+        return;
+      }
+      
+      const publishDateStr = resultDateStr.toString().trim();
+      const regex = /^(\d{4})-(\d{2})-(\d{2}) (\d{1,2}):(\d{2}) (AM|PM)$/i;
+      const matches = publishDateStr.match(regex);
+      
+      if (!matches) {
+        console.error("Invalid date format:", publishDateStr);
+        hideLoading();
+        alert("⚠️ Result date format is incorrect. Please contact college office.");
+        return;
+      }
+      
+      let year = parseInt(matches[1]);
+      let month = parseInt(matches[2]) - 1;
+      let day = parseInt(matches[3]);
+      let hour = parseInt(matches[4]);
+      let minute = parseInt(matches[5]);
+      let ampm = matches[6].toUpperCase();
+      
+      if (ampm === 'PM' && hour < 12) hour += 12;
+      if (ampm === 'AM' && hour === 12) hour = 0;
+      
+      const istDateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}T${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}:00+05:30`;
+      const publishDate = new Date(istDateStr);
+      const now = new Date();
+      
+      if (now.getTime() < publishDate.getTime()) {
+        const options = {
+          timeZone: 'Asia/Kolkata',
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
         };
         
-        const html = generateApplicationHtml(mockData);
-        displayDocument(html);
-      } else {
-        alert('Submission failed. Please try again.');
+        const formattedDate = publishDate.toLocaleString('en-IN', options);
+        const diffMs = publishDate.getTime() - now.getTime();
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+        
+        hideLoading();
+        alert(`⏰ Your Result is Not Yet Published\n\n` +
+              `📅 Publication Date: ${formattedDate} IST\n` +
+              `⏳ Time remaining: Approximately ${diffHours} hours ${diffMinutes} minutes\n\n` +
+              `Please check back after this time.`);
+        return;
       }
-    }, 1500); 
-  } catch (error) {
-    hideLoading();
-    console.error('Submission error:', error);
-    alert('An error occurred during submission. Please try again.');
+      
+      const response = await fetch(`${CONFIG.SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
+      const data = await response.json();
+      
+      setTimeout(() => {
+        hideLoading();
+        if (data.status === 'success') {
+          const html = generateResultHtml(data);
+          displayDocument(html);
+        } else {
+          alert('Error fetching result details.');
+        }
+      }, 1500);
+    } catch (err) {
+      hideLoading();
+      console.error("Error in handleResultSubmit:", err);
+      alert("Error checking result. Please try again or contact support.");
+    }
   }
-}
-  
+
+  async function handleNewApplicationSubmit(e) {
+    e.preventDefault();
+    showLoading('Submitting Application', 'Please wait while we process your application');
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    const photoFile = document.getElementById('photoInput').files[0];
+
+    if (photoFile) {
+      try {
+        const photoData = await readFileAsBase64(photoFile);
+        data.photo = JSON.stringify({
+          name: photoFile.name,
+          mimeType: photoFile.type,
+          data: photoData.split(',')[1]
+        });
+      } catch (error) {
+        hideLoading();
+        alert('Error processing photo. Please try again.');
+        return;
+      }
+    }
+
+    const submitData = new URLSearchParams();
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== undefined && value !== null) {
+        submitData.append(key, value);
+      }
+    }
+
+    try {
+      const response = await fetch(CONFIG.SCRIPT_URL, {
+        method: 'POST',
+        body: submitData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+      
+      const result = await response.json();
+      
+      setTimeout(() => {
+        hideLoading();
+        if (result.status === 'success') {
+          form.reset();
+          document.getElementById('photoPreview').style.display = 'none';
+          toggleSubmitButton(false);
+          
+          const mockData = {
+            collegeInfo: {
+              logo: 'https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg',
+              contact: 'كلية الحافظ ممو ملا لتحفيظ القرآن',
+              collegeName: 'AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN',
+              underOrg: 'Under QUWATHUL ISLAM SANGAM',
+              affiliation: 'Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD',
+              address: 'Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District'
+            },
+            studentData: {
+              ...data,
+              submissionDate: new Date().toISOString().split('T')[0],
+              applicationId: result.data.applicationId || 'APP-' + Date.now(),
+              photoUrl: photoFile ? URL.createObjectURL(photoFile) : null
+            }
+          };
+          
+          const html = generateApplicationHtml(mockData);
+          displayDocument(html);
+        } else {
+          alert('Submission failed. Please try again.');
+        }
+      }, 1500);
+    } catch (error) {
+      hideLoading();
+      console.error('Submission error:', error);
+      alert('An error occurred during submission. Please try again.');
+    }
+  }
+
   function escapeHtml(text) {
     if (!text) return '';
     const map = {
@@ -1826,16 +1723,17 @@ async function debugResultSettings() {
       return map[m];
     });
   }
+
   function updateDateDisplay(dateString, elementId) {
-  if (!dateString) return;
-  const parts = dateString.split('-');
-  const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.textContent = `Selected Date: ${formattedDate}`;
-    element.style.display = 'block';
+    if (!dateString) return;
+    const formattedDate = formatDateToDDMMYYYY(dateString);
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.textContent = `Selected Date: ${formattedDate}`;
+      element.style.display = 'block';
+    }
   }
-}
+
   function adjustTickerSpeed() {
     const tickerWrapper = document.querySelector('.ticker-wrapper');
     if (!tickerWrapper) return;
@@ -1845,7 +1743,7 @@ async function debugResultSettings() {
       tickerWrapper.style.animationDuration = '50s';
     }
   }
-  
+
   window.addEventListener('load', function() {
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.3s ease';
@@ -1854,34 +1752,35 @@ async function debugResultSettings() {
     }, 50);
     adjustTickerSpeed();
   });
-  
-  window.addEventListener('resize', adjustTickerSpeed);
-function showLoading(message = 'Processing...', subMessage = 'Please wait a moment') {
-  document.getElementById('loadingText').textContent = message;
-  document.getElementById('loadingSubtext').textContent = subMessage;
-  document.getElementById('loadingOverlay').style.display = 'flex';
-  
-  const activeButtons = document.querySelectorAll('button:focus, button:active');
-  activeButtons.forEach(btn => {
-    btn.classList.add('btn-loading');
-    const originalHtml = btn.innerHTML;
-    btn.setAttribute('data-original-html', originalHtml);
-    btn.innerHTML = '<span class="btn-spinner"></span><span class="btn-text">Loading...</span>';
-  });
-}
 
-function hideLoading() {
-  document.getElementById('loadingOverlay').style.display = 'none';
-  
-  document.querySelectorAll('.btn-loading').forEach(btn => {
-    const originalHtml = btn.getAttribute('data-original-html');
-    if (originalHtml) {
-      btn.innerHTML = originalHtml;
-    }
-    btn.classList.remove('btn-loading');
-    btn.removeAttribute('data-original-html');
-  });
-}
+  window.addEventListener('resize', adjustTickerSpeed);
+
+  function showLoading(message = 'Processing...', subMessage = 'Please wait a moment') {
+    document.getElementById('loadingText').textContent = message;
+    document.getElementById('loadingSubtext').textContent = subMessage;
+    document.getElementById('loadingOverlay').style.display = 'flex';
+
+    const activeButtons = document.querySelectorAll('button:focus, button:active');
+    activeButtons.forEach(btn => {
+      btn.classList.add('btn-loading');
+      const originalHtml = btn.innerHTML;
+      btn.setAttribute('data-original-html', originalHtml);
+      btn.innerHTML = '<span class="btn-spinner"></span><span class="btn-text">Loading...</span>';
+    });
+  }
+
+  function hideLoading() {
+    document.getElementById('loadingOverlay').style.display = 'none';
+
+    document.querySelectorAll('.btn-loading').forEach(btn => {
+      const originalHtml = btn.getAttribute('data-original-html');
+      if (originalHtml) {
+        btn.innerHTML = originalHtml;
+      }
+      btn.classList.remove('btn-loading');
+      btn.removeAttribute('data-original-html');
+    });
+  }
 </script>
 </body>
 </html>
