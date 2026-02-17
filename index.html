@@ -459,7 +459,6 @@
 <div class="islamic-ornament ornament-2">✸</div>
 <div class="islamic-ornament ornament-3">✸</div>
 
-<!-- Loading Overlay -->
 <div id="loadingOverlay" class="loading-overlay">
   <div class="loading-content">
     <div class="logo-animation-container">
@@ -489,42 +488,28 @@
   </div>
 </div>
 
-<!-- Date Configuration - Edit these values only -->
 <script>
-  // ===== CENTRALIZED DATE CONFIGURATION =====
-  // Edit only these values for all dates across the application
   const CONFIG = {
-    // Exam Date
-    EXAM_DATE_ISO: '2026-02-15',           // YYYY-MM-DD format
-    EXAM_DATE_DDMMYYYY: '15-02-2026',       // DD-MM-YYYY format
+    EXAM_DATE_ISO: '2026-02-15',
+    EXAM_DATE_DDMMYYYY: '15-02-2026',
     EXAM_DAY_MALAYALAM: 'ഞായർ',
     EXAM_TIME: '07:30 AM',
     EXAM_REPORTING_TIME: '07:30 AM',
     EXAM_DURATION: '08:00 AM - 12:30 PM',
     EXAM_VENUE: 'HIM Puthanpalli',
-    
-    // Application Deadline
     APPLICATION_DEADLINE_DDMMYYYY: '12-02-2026',
-    
-    // Result Date
-    RESULT_PUBLISH_DATE_ISO: '2026-02-17',  // YYYY-MM-DD format
+    RESULT_PUBLISH_DATE_ISO: '2026-02-17',
     RESULT_PUBLISH_DATE_DDMMYYYY: '17-02-2026',
     RESULT_PUBLISH_DAY_MALAYALAM: 'ചൊവ്വ',
     RESULT_PUBLISH_TIME: 'വൈകുന്നേരം 4 മണി',
-    
-    // Admission Dates
     ADMISSION_STARTS: 'പിന്നീട് അറിയിക്കും',
     CLASS_STARTS: 'പിന്നീട് അറിയിക്കും',
-    
-    // College Contact
     COLLEGE_PHONE: '9048020243',
     COLLEGE_EMAIL: 'mammumullacollege@gmail.com',
     
-    // Google Apps Script URL
     SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxO7KLtUlx_SciMT8UXBaluAbljZghqyiD4PY8XZrgg4mmy06wBj2MX0ixnO7R-zkBh0A/exec'
   };
   
-  // Helper function to format date from ISO to DD-MM-YYYY
   function formatDateToDDMMYYYY(isoDate) {
     if (!isoDate) return 'N/A';
     if (isoDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
@@ -534,7 +519,6 @@
     return isoDate;
   }
   
-  // Helper function to format date for display in forms
   function formatDateForDisplay(dateString) {
     if (!dateString) return 'N/A';
     if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
@@ -544,7 +528,6 @@
   }
 </script>
 
-<!-- Ticker Container -->
 <div class="ticker-container">
   <div class="ticker-wrapper">
     <div class="ticker-item">
@@ -561,11 +544,11 @@
     </div>
     <div class="ticker-item">
       <span class="ticker-badge">✨ UPDATED</span>
-      <strong id="tickerExamDate">15-02-2026 ഞായർ ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, 12-02-2026 ന് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</strong>
+      <strong id="tickerExamDate"></strong>
     </div>
     <div class="ticker-item">
       <span class="ticker-badge">✨ UPDATED</span>
-      <strong id="tickerResultDate">17-02-2026 ചൊവ്വ വൈകുന്നേരം 4 മണി ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ റിസള്‍ട്ട് പബ്ലിഷ് ചെയ്യും</strong>
+      <strong id="tickerResultDate"></strong>
     </div>
     <div class="ticker-item">
       <span class="ticker-badge">⚠ IMPORTANT</span>
@@ -578,7 +561,6 @@
   </div>
 </div>
 
-<!-- Page Header -->
 <div class="page-header">
   <div class="container">
     <div class="page-header-content">
@@ -588,9 +570,7 @@
   </div>
 </div>
 
-<!-- Main Content Area -->
 <div id="mainContentArea">
-  <!-- Dashboard Cards -->
   <section class="content-section" style="background: white;">
     <div class="container">
       <div class="row g-4">
@@ -622,14 +602,13 @@
     </div>
   </section>
 
-  <!-- Apply Now Form Section -->
   <section class="content-section" id="applyNowFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
         <h2 class="form-title"><i class="fas fa-file-alt me-2"></i>New Admission Application</h2>
         <div class="instructions-box mb-4">
           <h4 class="instructions-title"><i class="fas fa-lightbulb"></i> Important Notes</h4>
-          <p class="mb-0" id="examNote">പ്രവേശന പരീക്ഷ 15-02-2026 ഞായർ 07:30 AM</p>
+          <p class="mb-0" id="examNote"></p>
         </div>
         <form id="newApplicationForm" onsubmit="return handleNewApplicationSubmit(event)">
           <div class="form-step">
@@ -871,7 +850,6 @@
     </div>
   </section>
 
-  <!-- Download Application Form Section -->
   <section class="content-section" id="applicationFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -894,7 +872,6 @@
     </div>
   </section>
 
-  <!-- Hall Ticket Form Section -->
   <section class="content-section" id="hallticketFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -917,7 +894,6 @@
     </div>
   </section>
 
-  <!-- Result Form Section -->
   <section class="content-section" id="resultFormSection" style="display: none;">
     <div class="container">
       <div class="form-container" data-aos="fade-up">
@@ -941,10 +917,8 @@
   </section>
 </div>
 
-<!-- Document Display Area -->
 <div id="documentDisplayArea" style="display: none;"></div>
 
-<!-- WhatsApp Float Button -->
 <a href="https://wa.me/919048020243" class="whatsapp-float" target="_blank">
   <i class="fab fa-whatsapp"></i>
 </a>
@@ -953,9 +927,7 @@
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
-  // Initialize page with config values
   document.addEventListener('DOMContentLoaded', function() {
-    // Update ticker with config values
     document.getElementById('tickerExamDate').innerHTML = `${CONFIG.EXAM_DATE_DDMMYYYY} ${CONFIG.EXAM_DAY_MALAYALAM} ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, ${CONFIG.APPLICATION_DEADLINE_DDMMYYYY} ന് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക`;
     document.getElementById('tickerResultDate').innerHTML = `${CONFIG.RESULT_PUBLISH_DATE_DDMMYYYY} ${CONFIG.RESULT_PUBLISH_DAY_MALAYALAM} ${CONFIG.RESULT_PUBLISH_TIME} ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ റിസള്‍ട്ട് പബ്ലിഷ് ചെയ്യും`;
     document.getElementById('examNote').innerHTML = `പ്രവേശന പരീക്ഷ ${CONFIG.EXAM_DATE_DDMMYYYY} ${CONFIG.EXAM_DAY_MALAYALAM} ${CONFIG.EXAM_TIME}`;
